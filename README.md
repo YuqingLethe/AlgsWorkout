@@ -7,6 +7,11 @@ I will include the problem number in the beginning of every java file
 ######219 ContainsNearbyDuplicates
 Hash table should be used. Failed the runtime limits
 
+######234 LinkedList234PalindromeLinkedList
+
+Why my code return false when comparing negative numbers like followings
+`[-16557,-8725,-29125,28873,-21702,15483,-28441,-17845,-4317,-10914,-10914,-4317,-17845,-28441,15483,-21702,28873,-29125,-8725,-16557]`
+
 
 ### Local output is different from Leetcode System
 
