@@ -18,7 +18,7 @@ Ok in my eclipse. Result are different in leetcode under the circumstance of [1,
 ###### 88 MergeTwoSort (Version 1)
 while {0} 0 {1} 1, my computer return [1] but leetcode system return [0] 
 
-### Recursive Methods
+### To-do by Recursive Methods
 ######24
 ######206
 
