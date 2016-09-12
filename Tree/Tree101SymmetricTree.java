@@ -3,9 +3,6 @@ package Tree;
 import java.util.LinkedList;
 import java.util.Stack;
 
-/**
- * Created by XiaoMi on 2016/9/5.
- */
 public class Tree101SymmetricTree {
     //Runtime: 6ms Use: 20min
     public boolean isSymmetricBySameTree(TreeNode root) {
