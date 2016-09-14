@@ -1,9 +1,6 @@
 package Tree;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Tree102BinaryTreeLevelOrderTraversal {
     //Runtime: 3ms Use: 13min 9/11/2016 Add to the list level by level
@@ -31,8 +28,9 @@ public class Tree102BinaryTreeLevelOrderTraversal {
     }
 
 
-    //HOLD 9/7/2016 Cannot use index and 2*n - 1
+
     //9/11/2016 Runtime: 4ms Use: 1hr Use BFS but add to the list node-by-node
+    //HOLD 9/7/2016 Cannot use index and 2*n - 1
     public  List<List<Integer>> levelOrderByBFSWithAddToList(TreeNode root) {
 
         List<List<Integer>> result = new LinkedList<List<Integer>>();
@@ -92,6 +90,31 @@ public class Tree102BinaryTreeLevelOrderTraversal {
         res.get(height).add(root.val);
         levelHelper(res, root.left, height+1);
         levelHelper(res, root.right, height+1);
+    }
+
+    //TODO: iterative DFS seems cannot do it by two stack.ONly way is store positions of each TN
+
+    public List<List<Integer>> LevelOrderByDFS(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (root == null) { return result; }
+        Stack<TreeNode> tnStack = new Stack<TreeNode>();
+        Stack<Integer> heightStack = new Stack<Integer>();
+        tnStack.push(root);
+        heightStack.push(1);
+
+        while(!tnStack.isEmpty()) {
+            TreeNode currTN = tnStack.pop();
+            Integer currHeight = heightStack.pop();
+            result.get(currHeight).add(currTN.val);
+            if (currTN.left != null) {
+                tnStack.push(currTN.left); heightStack.push(currHeight + 1);
+            }
+            if (currTN.right != null) {
+                tnStack.push(currTN.right); heightStack.push(currHeight + 1);
+            }
+        }
+        return result;
+
     }
 
     public static void main(String[] args) {
