@@ -6,7 +6,7 @@ public class Tree102BinaryTreeLevelOrderTraversal {
     //Runtime: 3ms Use: 13min 9/11/2016 Add to the list level by level
     public  List<List<Integer>> levelOrderByBFS(TreeNode root) {
 
-        List<Integer> currLevel = new LinkedList<Integer>();
+        List<Integer> currLevel = new LinkedList<Integer>();//其实可以在while里面定义的，没必要在这里定义
         List<List<Integer>> result = new LinkedList<List<Integer>>();
         if (root == null) {
             return result;
@@ -92,20 +92,27 @@ public class Tree102BinaryTreeLevelOrderTraversal {
         levelHelper(res, root.right, height+1);
     }
 
-    //TODO: iterative DFS seems cannot do it by two stack.ONly way is store positions of each TN
-
+    //Runtime: 4ms Done on 9/24/2016. Use stack but push right node first.
+    //Pay attention when result.size() <= currHeight
     public List<List<Integer>> LevelOrderByDFS(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         if (root == null) { return result; }
         Stack<TreeNode> tnStack = new Stack<TreeNode>();
         Stack<Integer> heightStack = new Stack<Integer>();
         tnStack.push(root);
-        heightStack.push(1);
+        heightStack.push(0);
 
         while(!tnStack.isEmpty()) {
             TreeNode currTN = tnStack.pop();
             Integer currHeight = heightStack.pop();
-            result.get(currHeight).add(currTN.val);
+            if(result.size() > currHeight) {
+                result.get(currHeight).add(currTN.val);
+            } else {
+                List<Integer> tempList = new ArrayList<Integer>();
+                tempList.add(currTN.val);
+                result.add(tempList);
+            }
+
             if (currTN.left != null) {
                 tnStack.push(currTN.left); heightStack.push(currHeight + 1);
             }
