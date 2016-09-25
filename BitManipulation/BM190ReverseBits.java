@@ -2,6 +2,7 @@ package BitManipulation;
 
 public class BM190ReverseBits {
     //Use: 30min
+    //TODO: One test case not passed
     public static int reverseBits(int n) {
         char[] ca = Integer.toBinaryString(n).toCharArray();
 
