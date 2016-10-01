@@ -1,5 +1,9 @@
 package BitManipulation;
 
+/**
+ * 5.6 Write a program to swap odd and even bits in an integer with as few instructions as possible
+ * (e.g., bit 1 and bit 1 are swapped, bit 2 and bit 3 are swapped, and so on)
+ */
 public class CC150Ch5BM56 {
     private static int swapOddEvenBits (int n) {
      //   return ( (n&0xaaaaaaaa) >> 1 )|( (n&0x55555555) << 1);
