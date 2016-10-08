@@ -21,9 +21,22 @@ public class HM136SingleNumber {
         return -1;
     }
 
+    /**
+     * Runtime: 1ms Use: 1min
+     * @param nums
+     * @return
+     */
+    private static int singleNumberByBit(int[] nums) {
+        int diff = 0;
+        for (int n: nums) {
+            diff = diff^n;
+        }
+        return diff;
+    }
+
 
     public static void main(String[] args) {
         int[] x = {3,3,1,2,1,4,4,2,6};
-        System.out.println(singleNumberByMemory(x));
+        System.out.println(singleNumberByBit(x));
     }
 }
