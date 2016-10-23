@@ -1,13 +1,13 @@
 package Math;
 
-/**
- * Runtime: 191ms   10/22/2016中心思想是，v储存后半部分，x储存前半部分，
- * 比如12321在while循环之后v=123 x=12
- * 如果位数为奇数就会落到第二个if(v>x)这里从而把中间那个数去掉，所以v=12
- * https://discuss.leetcode.com/topic/40845/9-ms-java-beats-99-5-java-solutions-easy-to-understand/2
- * 巧妙在用了一个循环把后半部分的数倒过来
- */
 public class Math9PalindromeNumber {
+    /**
+     * Runtime: 191ms   10/22/2016中心思想是，v储存后半部分，x储存前半部分，
+     * 比如12321在while循环之后v=123 x=12
+     * 如果位数为奇数就会落到第二个if(v>x)这里从而把中间那个数去掉，所以v=12
+     * https://discuss.leetcode.com/topic/40845/9-ms-java-beats-99-5-java-solutions-easy-to-understand/2
+     * 巧妙在用了一个循环把后半部分的数倒过来
+     */
     public boolean isPalindromeGetLatterHalf(int x) {
         if (x < 0) return false;
         if(x<10) return true;
@@ -30,17 +30,21 @@ public class Math9PalindromeNumber {
     }
 
     /**
-     * Runtime:    Use:     10/22/2016
+     * Runtime: 200ms   Use:     10/22/2016
      * To avoid overflow of reversed number, leave the first digit
      * https://discuss.leetcode.com/topic/9477/o-1-space-o-lgn-time-java-solution-no-overflow-risk/2
      */
     public boolean isPalindromeGetReverseNumber(int x) {
         if (x < 0) return false;
+        if (x < 10) return true;
         int r = 0; //reversed number
         int o = x; //original number
 
         while(o > 9) {
-
+            int temp = o%10;
+            r = r*10 + temp;
+            o /= 10;
         }
+        return r == x/10 && o == x%10;
     }
 }
