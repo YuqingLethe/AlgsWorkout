@@ -4,8 +4,6 @@ public class Math326PowerOfThree {
 	/**
 	 * Method 1<br>
 	 * Count the pwoer of three one by one and compare
-	 * @param n
-	 * @return
 	 */
 	public boolean isPowerOfThree1(int n) {
         double exp = 1.0;
