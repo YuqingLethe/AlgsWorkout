@@ -2,7 +2,7 @@ package Math;
 
 import java.util.ArrayList;
 
-public class Math202HappyNumber {
+public class  Math202HappyNumber {
 	/**
 	 * Method 1 66ms for 401 test cases<br>
 	 * Original thought. Store all numbers for endless check
