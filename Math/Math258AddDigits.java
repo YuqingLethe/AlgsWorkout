@@ -29,16 +29,17 @@ public class Math258AddDigits {
     }
 
     /**
-     * TODO: negative number
+     * Another way to deal with 9, 18, -9, 18
      * https://discuss.leetcode.com/topic/36722/java-o-1-solution-for-positive-and-negative-numbers
-     * @param num
-     * @return
      */
-    public static int addDigitsAlsoForNegative(int num) {
-        return 1;
+    public static int addDigitsAlsoByNineForNegative(int num) {
+        if (num >= 0)
+            return 1 + (num - 1)%9;
+        else
+            return -1 + (num + 1)%9;
     }
     public static void main(String[] args) {
-        System.out.println(addDigits(38));
-        System.out.println(0%9);
+        System.out.println(addDigitsAlsoByNineForNegative(-9));
+        System.out.println(-37%9);
     }
 }
