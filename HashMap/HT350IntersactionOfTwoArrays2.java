@@ -61,11 +61,58 @@ public class HT350IntersactionOfTwoArrays2 {
         return r;
     }
     /**
-     * TODO: Use BinarySearch to solve the problem
+     * Runtime: 5ms   11/16/2016
+     * If use Arrays.copyOf() only 4ms
      * https://discuss.leetcode.com/topic/59997/java-3ms-beats-95-33-using-binary-search
      */
-    public int[] intersectByBinarySearch(int[] nums1, int[] nums2) {
-        int[] r = new int[1];
-        return r;
+    public static int[] intersectByBinarySearch(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            int [] tmp = nums1;
+            nums1 = nums2; //The shorter array
+            nums2 = tmp; //The larger array
+        }
+        Arrays.sort(nums2);
+        Arrays.sort(nums1);
+
+        ArrayList<Integer> al = new ArrayList<>();
+        int startIndex = 0;
+        for (int i = 0; i < nums1.length; i++) {
+            int locate = binarySearch(nums2, startIndex, nums2.length - 1, nums1[i]);
+            if (locate != -1) {
+                al.add(nums2[locate]);
+                startIndex = locate + 1;
+            }
+        }
+
+        int[] answer = new int[al.size()];
+        for (int i = 0; i < al.size(); i++) {
+            answer[i] = al.get(i);
+        }
+        return answer;
+    }
+    private static int binarySearch (int[] num, int start, int end, int target) {
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            if (num[mid] == target ) {
+                if (mid == start || (mid > start && num[mid - 1] != target)) return mid;
+                else {
+                    end = mid - 1;
+                }
+            } else if (num[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2, 2, 1};
+        int[] nums2 = {1, 1};
+        int[] answer = intersectByBinarySearch(nums1, nums2);
+        for (int i : answer) {
+            System.out.print(i + " ");
+        }
     }
 }
