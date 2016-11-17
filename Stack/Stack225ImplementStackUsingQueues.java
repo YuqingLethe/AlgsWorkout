@@ -26,9 +26,6 @@ public class Stack225ImplementStackUsingQueues {
                 }
             }
         }
-        public void push2(int x) {
-
-        }
 
         public void pop() {
             q1.poll();
@@ -42,6 +39,54 @@ public class Stack225ImplementStackUsingQueues {
             if(q1.isEmpty()) return true;
             else return false;
         }
+    }
+
+    /**
+     * Runtime:
+     */
+    public class StackByPopTopInefficient {
+        private Queue<Integer> q1 = new LinkedList<>();
+        private Queue<Integer> q2 = new LinkedList<>();
+
+        public void push(int x) {
+            q1.add(x);
+        }
+        public void pop() {
+            if (q1.isEmpty()) {
+                for (int i = 0; i < q2.size() - 1; i++) {
+                    q1.add(q2.poll());
+                }
+                q2.poll();
+            } else {
+                for (int i = 0; i < q1.size() - 1; i++) {
+                    q2.add(q1.poll());
+                }
+                q1.poll();
+            }
+        }
+        public int top() {
+            int answer;
+            if (q1.isEmpty()) {
+                for (int i = 0; i < q2.size() - 1; i++) {
+                    q2.add(q1.poll());
+                }
+                answer = q2.peek();
+            } else {
+                for (int i = 0; i < q1.size() - 1; i++) {
+                    q2.add(q1.poll());
+                }
+                answer = q1.peek();
+            }
+            return answer;
+        }
+        public boolean empty() {
+            return q1.isEmpty() && q2.isEmpty();
+        }
+    }
+    public static void main(String[] args) {
+        int[] nums = {0,1,0,2,0,3,2};
+        StackByPopTopInefficient stack = new StackByPopTopInefficient();
+
     }
 
 
@@ -63,11 +108,12 @@ public class Stack225ImplementStackUsingQueues {
         }
     }
 
-    //TODO: make pop() and peek() inefficient
 //https://discuss.leetcode.com/topic/36189/java-solutions-about-three-ways-one-of-which-utilizes-one-queue-and-the-others-utilize-two-queues
 
 
 }
+
+
 
 
 
