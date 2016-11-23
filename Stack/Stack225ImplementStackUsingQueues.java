@@ -44,7 +44,7 @@ public class Stack225ImplementStackUsingQueues {
     /**
      * Runtime:
      */
-    public class StackByPopTopInefficient {
+    public static class StackByPopTopInefficient {
         private Queue<Integer> q1 = new LinkedList<>();
         private Queue<Integer> q2 = new LinkedList<>();
 
@@ -86,7 +86,6 @@ public class Stack225ImplementStackUsingQueues {
     public static void main(String[] args) {
         int[] nums = {0,1,0,2,0,3,2};
         StackByPopTopInefficient stack = new StackByPopTopInefficient();
-
     }
 
 
