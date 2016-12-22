@@ -68,6 +68,7 @@ public class No387FirstUniqueCharacterInAString {
 
     /**
      * Runtime: 97ms Use map 11/12/2016
+     * Use frequency as value
      */
     public static int firstUniqCharByMap(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -83,14 +84,54 @@ public class No387FirstUniqueCharacterInAString {
     }
 
     /**
-     * TODO:
-     * Use the map to store the unique char and use set to find if existed
-     * https://discuss.leetcode.com/topic/55488/java-one-pass-solution-with-linkedhashmap/2
+     * Runtime: 148ms Use: 20min 12/22/2016
+     * Use the map to store the unique char and use set to find if existed. Direct think
      */
-    public static int firstUniqCharByMapSet(String s) {
+    public static int firstUniqCharByMapSet1(String s) {
         Set<Character> set = new HashSet<>();
         Map<Character, Integer> map = new HashMap<>();
-        return 1;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!set.contains(c)) {
+                set.add(c);
+                map.put(c, i);
+            } else {
+                map.remove(c);
+                map.put(c, i);
+            }
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (set.contains(c) && map.get(c) == i) return i;
+            else if (set.contains(c)){
+                set.remove(c);
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     *
+     * https://discuss.leetcode.com/topic/55488/java-one-pass-solution-with-linkedhashmap/2
+     */
+    public static int firstUniqCharByMapSet2(String s) {
+        Set<Character> set = new HashSet<>();
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (set.contains(c)) {
+                if (map.containsKey(c)) {
+                    set.remove(c);
+                }
+            } else {
+                map.put(c, i);
+                set.add(c);
+            }
+        }
+        if (set.size() == 0) return -1;
+        else
     }
 
     public static void main(String[] args) {

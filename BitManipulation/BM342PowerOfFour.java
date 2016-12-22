@@ -21,14 +21,33 @@ public class BM342PowerOfFour {
         return (Math.log(num)/Math.log(4))%1 == 0;
     }
 
-    //TODO: USing looping
+    //Runtime: 2ms  Use: 1min
     public static boolean isPowerOfFourByRecursive(int num) {
-        return true;
+        if (num == 1) return true;
+        if (num <= 0) return false;
+        if (num%4 != 0) return false;
+        else return isPowerOfFourByRecursive(num/4);
     }
+
+    //Runtime: 2ms  Use: 1hr to debug....
     public static boolean isPowerOfFourByIterative(int num) {
+        if (num == 1) return true;
+        if (num < 4 || num <= 0) return false;
+        int div = 4;
+        while (num > 1) {
+            if (num%div != 0){
+                return false;
+            } else {
+                num /= 4;
+            }
+        }
         return true;
     }
+
     public static void main(String[] args) {
-        System.out.println(isPowerOfFourByMath(1073741824));
+        System.out.println(isPowerOfFourByRecursive(2));
+        System.out.println(isPowerOfFourByIterative(8));
+        System.out.println(isPowerOfFourByIterative(-4));
+        System.out.println(isPowerOfFourByIterative(1073741824));
     }
 }
