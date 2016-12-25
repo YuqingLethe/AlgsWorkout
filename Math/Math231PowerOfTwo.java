@@ -22,11 +22,12 @@ public class Math231PowerOfTwo {
     }
 
     /**
-     * TODO: Try the math, see hints in CSDN
+     * Runtime: 2ms
      * https://discuss.leetcode.com/topic/47195/4-different-ways-to-solve-iterative-recursive-bit-operation-math
      */
-    public static boolean isPowerOfTwoByMath(int n) {
-        return true;
+    public static boolean isPowerOfTwoByMathDivision(int n) {
+        if (n <= 0) return false;
+        return 1073741824%n == 0;
     }
 
     /**

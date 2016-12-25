@@ -1,9 +1,6 @@
 package NoTag;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/11/11.
@@ -113,29 +110,30 @@ public class No387FirstUniqueCharacterInAString {
     }
 
     /**
-     *
+     * Runtime: 89ms
+     * Optimize of previous one. LinkedMapSet returns value by the input order!
      * https://discuss.leetcode.com/topic/55488/java-one-pass-solution-with-linkedhashmap/2
      */
     public static int firstUniqCharByMapSet2(String s) {
         Set<Character> set = new HashSet<>();
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new LinkedHashMap<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (set.contains(c)) {
                 if (map.containsKey(c)) {
-                    set.remove(c);
+                    map.remove(c);
                 }
             } else {
                 map.put(c, i);
                 set.add(c);
             }
         }
-        if (set.size() == 0) return -1;
-        else
+
+        return map.size() == 0 ? -1 : map.entrySet().iterator().next().getValue();
     }
 
     public static void main(String[] args) {
-        String s = "aacdad";
-        System.out.println(firstUniqCharByMap(s));
+        String s = "daacdad";
+        System.out.println(firstUniqCharByMapSet2(s));
     }
 }

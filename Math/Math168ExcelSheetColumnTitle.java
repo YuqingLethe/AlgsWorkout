@@ -21,7 +21,26 @@ public class Math168ExcelSheetColumnTitle {
         return answer;
     }
     //TODO: Worth to do again
+
+    /**
+     * IT's a wrong answer, but shows how I think it at the second time
+     * Bad case: 703 -> AAA
+     */
+    public static String convertToTitle2time(int n) {
+        String answer = "";
+        int mod = (n - 1)%26;
+        int tmp = n - 1;
+        while(tmp > 26) {
+            tmp = tmp/26;
+            answer = Character.toString((char) ('A' + tmp%26 - 1)) + answer;
+        }
+
+        answer += Character.toString((char) ('A' + mod));
+        return answer;
+    }
+
     public static void main(String[] args) {
-        System.out.println(convertToTitle(696));
+        System.out.println(convertToTitle2time(28));
+        System.out.println(convertToTitle2time(696));
     }
 }
