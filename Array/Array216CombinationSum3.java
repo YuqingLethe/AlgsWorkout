@@ -22,7 +22,7 @@ public class Array216CombinationSum3 {
             List<Integer> li = new ArrayList<Integer>(list);
             ans.add(li);
         }
-        for (int i = start; i < 10 && n > 0 && k > 0; i++) {//TODO: why start <= n ?
+        for (int i = start; i < 10 && n > 0 && k > 0; i++) {
             list.add(i);
             findTheOthers(k - 1, n - i, ans, list, i + 1);
             list.remove(list.size() - 1);
