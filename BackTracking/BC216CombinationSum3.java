@@ -1,12 +1,12 @@
-package Array;
+package BackTracking;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/12/25.
+ * Created by Administrator on 2016/12/31.
  */
-public class Array216CombinationSum3 {
+public class BC216CombinationSum3 {
     /**
      * Runtime: 1ms Use: 1hr 12/26/2016
      * https://discuss.leetcode.com/topic/37962/fast-easy-java-code-with-explanation/2
