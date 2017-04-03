@@ -40,4 +40,62 @@ public class Binary287FindTheDuplicatedNumber {
         }
         return slow;
     }
+
+    /**
+     * Runtime:   1ms  Use: 3ms
+     * Brilliant idea
+     */
+    public int findDuplicateByCycleSelf(int[] nums) {
+        int latter = nums[0];
+        int former = nums[nums[0]];
+
+        while(latter != former) {
+            latter = nums[latter];
+            former = nums[nums[former]];
+        }
+        former = 0;
+        while(latter != former) {
+            former = nums[former];
+            latter = nums[latter];
+        }
+        return former;
+    }
+
+    /**
+     * Runtime:  5ms  Use:  4ht
+     * https://discuss.leetcode.com/topic/25580/two-solutions-with-explanation-o-nlog-n-and-o-n-time-o-1-space-without-changing-the-input-array
+     *
+     * https://discuss.leetcode.com/topic/25580/two-solutions-with-explanation-o-nlog-n-and-o-n-time-o-1-space-without-changing-the-input-array/11
+     */
+    public static int findDuplicateBinary(int[] nums) {
+        int low = 0, high = nums.length - 1;
+
+        while (low < high) {
+            int mid = (high - low)/2 + low;
+            //Find the counts less than the nums[mis]
+            int count = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] <= mid)
+                count++;
+            }
+
+            if (count <= mid) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {2,1,1};
+        int[] nums2 = {1,1};
+        int[] nums3 = {1,2,2};
+        int[] nums4 = {1,3,4,2,2};
+        System.out.println(findDuplicateBinary(nums1));
+        System.out.println(findDuplicateBinary(nums2));
+        System.out.println(findDuplicateBinary(nums3));
+        System.out.println(findDuplicateBinary(nums4));
+    }
 }
