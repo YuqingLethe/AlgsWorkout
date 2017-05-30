@@ -19,30 +19,13 @@ public class Binary287FindTheDuplicatedNumber {
     }
 
     /**
-     * todo: rewrite it someday
+     * See findDuplicateByCycleSelf
      * https://discuss.leetcode.com/topic/25913/my-easy-understood-solution-with-o-n-time-and-o-1-space-without-modifying-the-array-with-clear-explanation/2
      * https://discuss.leetcode.com/topic/25685/java-o-n-time-and-o-1-space-solution-similar-to-find-loop-in-linkedlist
      */
-    public int findDuplicateByCycle(int[] nums) {
-        int slow = nums[0];
-        int fast = nums[nums[0]];
-        while (slow != fast)
-        {
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-        }
-
-        fast = 0;
-        while (fast != slow)
-        {
-            fast = nums[fast];
-            slow = nums[slow];
-        }
-        return slow;
-    }
 
     /**
-     * Runtime:   1ms  Use: 3ms
+     * Runtime:   1ms  Use: 3ms 4/1/2017
      * Brilliant idea
      */
     public int findDuplicateByCycleSelf(int[] nums) {
@@ -62,7 +45,7 @@ public class Binary287FindTheDuplicatedNumber {
     }
 
     /**
-     * Runtime:  5ms  Use:  4ht
+     * Runtime:  5ms  Use:  4ht   4/1/2017
      * https://discuss.leetcode.com/topic/25580/two-solutions-with-explanation-o-nlog-n-and-o-n-time-o-1-space-without-changing-the-input-array
      *
      * https://discuss.leetcode.com/topic/25580/two-solutions-with-explanation-o-nlog-n-and-o-n-time-o-1-space-without-changing-the-input-array/11
