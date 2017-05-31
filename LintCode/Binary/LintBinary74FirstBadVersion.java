@@ -12,6 +12,17 @@ package LintCode.Binary;
  * the kth code version is bad or not.
  */
 
+ class SVNRepo {
+      public static boolean isBadVersion(int k) {
+          int firstBadVersion = 5;
+          if (k >= firstBadVersion) {
+              return true;
+          } else {
+              return false;
+          }
+      }
+  }
+
 public class LintBinary74FirstBadVersion {
     /** 写了很久, 得30min
      * @param n: An integers.
