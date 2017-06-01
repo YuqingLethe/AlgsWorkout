@@ -44,7 +44,7 @@ public class LintBinary14FirstPositionOfTarget {
                 hi = mid;
             }
         }
-        if (nums[lo] == target) //这个想法很好, 至少一个点会落在first position上
+        if (nums[lo] == target) //这个想法很好, 至少一个点会落在first position上. 同理LastPositionOfTarget, 先检测非普遍的那侧
             return lo;
         if (nums[hi] == target)
             return hi;
