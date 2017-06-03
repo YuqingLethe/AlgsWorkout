@@ -1,4 +1,4 @@
-package LintCode.Binary;
+package LintCode.Binary.Binary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
