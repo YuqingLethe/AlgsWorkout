@@ -5,6 +5,7 @@ package LintCode.Binary;
  */
 public class LintBianry159FindMinimumInRotatedSortedArray {
     //本题实际考察的是最坏情况的判断!!
+    // 关联题目LintBinary39
     /**
      * @param nums: a rotated sorted array
      * @return: the minimum number in the array

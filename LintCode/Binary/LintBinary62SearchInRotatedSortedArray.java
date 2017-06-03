@@ -72,7 +72,7 @@ public class LintBinary62SearchInRotatedSortedArray {
                 if (A[start] <= target && target <= A[mid]) {
                     end = mid;
                 } else {
-                    start = mid;
+                    start = mid; //没必要再考虑A[mid] == target的情况因为最终会落到start或者end上面
                 }
             } else {
                 // situation 2, green line
