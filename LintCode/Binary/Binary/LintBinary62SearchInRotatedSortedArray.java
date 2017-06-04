@@ -52,7 +52,7 @@ public class LintBinary62SearchInRotatedSortedArray {
         }
     }
 
-    //Answer:
+    //Answer: 比较的是A[start] and A[mid] 非常有意思, 值得深思.
     public int searchAnswer(int[] A, int target) {
         if (A == null || A.length == 0) {
             return -1;
