@@ -71,6 +71,38 @@ public class Binary287FindTheDuplicatedNumber {
         return low;
     }
 
+    /**
+     * 6/4/2017 还是没思路, 看了一小下答案, 瞬间通透, 包括究竟哪个是sorted array
+     */
+    public int findDuplicateTideCode(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        int lo = 1;
+        int hi = nums.length - 1;
+        while (lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (countSmaller(nums, mid) > mid) {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+        if (countSmaller(nums, lo) > lo) {
+            return lo;
+        }
+        return hi;
+    }
+    private int countSmaller(int[] nums, int idx) {
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= idx) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         int[] nums1 = {2,1,1};
         int[] nums2 = {1,1};
