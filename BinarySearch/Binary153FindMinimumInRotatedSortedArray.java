@@ -77,7 +77,7 @@ public class Binary153FindMinimumInRotatedSortedArray {
     }
 
     /**
-     * Find the first element that is smaller than nums[nums.length - 1]
+     * Find the first element that is smaller than nums[nums.length - 1] 6/4/2017
      * Can also make the rigihtmostValue as target and do it like BinarySearch
      * 前提条件: No Duplicates
      */
