@@ -3,88 +3,34 @@ package Tree;
 import java.util.LinkedList;
 
 /**
- * Created by XiaoMi on 2016/9/24.
+ * 三种方法:
+ * 一是两个recursion
+ * 二是一个recursion只, 返回值如果是正数就是height如果 -1说明不balance
+ * 三是用resultType来记录isBalanced和Depth
  */
 public class Tree110BalancedBinaryTree {
-    //It has logic flaw 9/24/2016 Use: 15min
-    public boolean isBalancedByDifferNode(TreeNode root) {
-        if (    root == null
-                ||
-                (root != null && root.left == null && root.right == null)
-            ) {
+    //之前的错误思路: http://blog.csdn.net/eatbanli/article/details/52658847
+
+
+    /**
+     * 9/24/2016 & 6/13/2017 Run this method and AC first time
+     */
+    public boolean IsBalancedTwoRecursion(TreeNode root) {
+        if (root == null) {
             return true;
         }
-        LinkedList<TreeNode> lltn = new LinkedList<TreeNode>();
-        lltn.add(root);
-        while(!lltn.isEmpty()) {
-            TreeNode curr = lltn.poll();
-            if (curr.left != null && curr.right != null) {
-                lltn.add(curr.left);
-                lltn.add(curr.right);
-            //Find the Node that made the difference
-            }else if (curr.left == null && curr.right != null) {
-                if (curr.right.left != null || curr.right.right != null) { return false; }
-                else { lltn.add(curr.right); }
-            } else if (curr.right == null && curr.left != null){
-                if (curr.left.left != null || curr.left.right != null) { return false; }
-                else { lltn.add(curr.left); }
-            }
-        }
-        return true;
-    }
-
-    //Use: 25min logic Flaw. Didn't understand the question. 9/24/2016
-    public boolean isBalancedByTraveresal(TreeNode root) {
-        if (    root == null
-                ||
-                (root != null && root.left == null && root.right == null)
-                ) {
+        if ((Math.abs(height(root.left) - height(root.right)) <= 1)
+             && (IsBalancedTwoRecursion(root.left) && IsBalancedTwoRecursion(root.right))
+            ){
             return true;
         }
-        LinkedList<TreeNode> lltn = new LinkedList<TreeNode>();
-        lltn.add(root);
-        int height = 0;
-        boolean missingNodeFlag = false;
-
-        while (!lltn.isEmpty()) {
-            int size = lltn.size();
-            if (size < Math.pow(2, height)) {
-                missingNodeFlag = true;
-            };
-            //Enqueue all the children of current level nodes
-            while (--size >= 0) {
-                TreeNode curr = lltn.poll();
-                if (curr.left != null) { lltn.add(curr.left); }
-                if (curr.right != null) { lltn.add(curr.right); }
-
-            }
-            //if the current level is not full and the next level exists
-            if (missingNodeFlag && lltn.size() > 0) {
-                return false;
-            }
-            height++;
-        }
-        return true;
+        return false;
     }
-    //Runtime: 3ms Use: 12min
-    public static boolean isBalancedBySubHeightRecursive(TreeNode root) {
-        if (root == null ||
-            (root != null && root.left == null && root.right == null)
-            ) {
-            return true;
+    private int height(TreeNode root) {
+        if (root == null) {
+            return 0;
         }
-        if (Math.abs(binaryTreeHeight(root.left) - binaryTreeHeight(root.right)) > 1) {
-            return false;
-        }
-        if (!isBalancedBySubHeightRecursive(root.left) || !isBalancedBySubHeightRecursive(root.right)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static int binaryTreeHeight (TreeNode root) {
-        if (root == null) return 0;
-        return 1 + Math.max(binaryTreeHeight(root.left), binaryTreeHeight(root.right));
+        return Math.max(height(root.left), height(root.right)) + 1;
     }
 
     //
@@ -92,6 +38,7 @@ public class Tree110BalancedBinaryTree {
 
     /**
      * Runtime: 1ms Passed First Time Yay!
+     * 这个方法比IsBalancedTwoRecursion() 好的地方是, 如果左子树不balance,不再比较右子树. 更快
      * Comparing the subtree's height in the getDepth(). O(n) instead of O(n^2)
      * Get the idea in "https://discuss.leetcode.com/topic/11007/java-solution-based-on-height-check-left-and-right-node-in-every-recursion-to-avoid-further-useless-search"
      * @param root
@@ -114,7 +61,6 @@ public class Tree110BalancedBinaryTree {
         }
 
     }
-
     private static int getDepth(TreeNode root) {
         if (root == null) return 0;
         int leftDepth = getDepth(root.left);
@@ -129,6 +75,7 @@ public class Tree110BalancedBinaryTree {
         return -1;
     }
 
+    //Method 3: http://www.jiuzhang.com/solutions/balanced-binary-tree/
 
 
     public static void main(String[] args) {

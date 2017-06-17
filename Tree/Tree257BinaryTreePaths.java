@@ -30,7 +30,7 @@ public class Tree257BinaryTreePaths {
                 result.add(str.substring(0,str.length()-2));
                 al.removeLast();
                 //If the parent node doesn't have the other child, pop the parent nodes
-                while (al.size() > 0 && al.getLast() != both) {
+                while (al.size() > 0 && al.getLast() != both) {//这个both flag很好, 因为只有两个子节点的时候, 这里需要执行另一个子节点
                     al.removeLast();
                 }
                 if (al.size() == 0) return result;
@@ -90,7 +90,9 @@ public class Tree257BinaryTreePaths {
         return answer;
     }
 
-    //TODO: USing string builder
+    //TODO: Divide and conquer
+    // http://www.jiuzhang.com/solutions/binary-tree-paths/
+
     //https://discuss.leetcode.com/topic/23114/java-solution-using-stringbuilder-instead-of-string-manipulation
     public static void main(String[] args) {
         TreeNode tn1 = new TreeNode(1);
