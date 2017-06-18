@@ -1,9 +1,9 @@
 package LintCode.Binary.Tree;
 
 /**
- * Created by Administrator on 2017/6/16.
+ * Created by Administrator on 2017/6/18.
  */
-public class BinaryTree596MinimumSubtree {
+public class Tree596MinimumSubtree {
     /**
      * 方法1: Traverse + divide conquer
      */
@@ -30,8 +30,6 @@ public class BinaryTree596MinimumSubtree {
 
     }
 
-
-
     /**
      *方法2 pure divide conquer
      */
@@ -39,22 +37,22 @@ public class BinaryTree596MinimumSubtree {
         if (root == null) {
             return null;
         }
-        ResultType rootRT = search(root);
+        ResultTypeMinSubtree rootRT = search(root);
         return rootRT.minSubtree;
 
     }
-    private ResultType search(TreeNode root) {
+    private ResultTypeMinSubtree search(TreeNode root) {
         int minSum = Integer.MAX_VALUE;
         int sum = 0;
         TreeNode minSubtree = root;
         if (root.left == null && root.right == null) {
             minSum = root.val;
             sum = root.val;
-            ResultType tmp = new ResultType(minSubtree, minSum, sum);
+            ResultTypeMinSubtree tmp = new ResultTypeMinSubtree(minSubtree, minSum, sum);
             return tmp;
         }
         if (root.left != null) {
-            ResultType leftRT = search(root.left);
+            ResultTypeMinSubtree leftRT = search(root.left);
             sum += leftRT.sum;
             if (minSum > leftRT.minSum) {
                 minSum = leftRT.minSum;
@@ -63,7 +61,7 @@ public class BinaryTree596MinimumSubtree {
 
         }
         if (root.right != null) {
-            ResultType rightRT = search(root.right);
+            ResultTypeMinSubtree rightRT = search(root.right);
             sum += rightRT.sum;
             if (minSum > rightRT.minSum) {
                 minSum = rightRT.minSum;
@@ -75,18 +73,17 @@ public class BinaryTree596MinimumSubtree {
             minSum = sum;
             minSubtree = root;
         }
-        ResultType currRT = new ResultType(minSubtree, minSum, sum);
+        ResultTypeMinSubtree currRT = new ResultTypeMinSubtree(minSubtree, minSum, sum);
         return currRT;
 
     }
 }
-class ResultType {
+class ResultTypeMinSubtree {
     public TreeNode minSubtree;
     public int sum, minSum;
-    public ResultType(TreeNode minSubtree, int minSum, int sum) {
+    public ResultTypeMinSubtree(TreeNode minSubtree, int minSum, int sum) {
         this.minSubtree = minSubtree;
         this.minSum = minSum;
         this.sum = sum;
     }
 }
-

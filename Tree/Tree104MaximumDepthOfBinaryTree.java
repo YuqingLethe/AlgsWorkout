@@ -118,9 +118,9 @@ public class Tree104MaximumDepthOfBinaryTree {
     }
 
     /**
-     * 6/12/2017 九章答案版本
+     * 6/12/2017 九章答案版本, Traverse方法
      */
-    int dep; //在哪里初始化别忘了
+    private int dep; //在哪里初始化别忘了
     public int maxDepthTraverse(TreeNode root) {
         dep = 0;
         helper(root, 1);

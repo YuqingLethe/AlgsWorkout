@@ -6,6 +6,32 @@ import java.util.List;
 
 public class Tree257BinaryTreePaths {
     /**
+     * Divide and conquer 6/18/2017
+     * http://www.jiuzhang.com/solutions/binary-tree-paths/
+     */
+    public List<String> binaryTreePathsByDC(TreeNode root) {
+        List<String> results = new ArrayList<>();
+        if (root == null) {
+            return results;
+        }
+        List<String> leftList = binaryTreePathsByDC(root.left);
+        List<String> rightList = binaryTreePathsByDC(root.right);
+        for (String s : leftList) {
+            String tmp = root.val + "->" + s;
+            results.add(tmp);
+        }
+        for (String s : rightList) {
+            results.add(root.val + "->" + s); //比上面的处理方法简洁
+        }
+        // 忘记了root is a leaf的情况. 所有results.add的情况全部是leftList和rightList不为空的情况之下的, 因此要考虑到叶子节点的add
+        if (results.size() == 0) {
+            results.add("" + root.val);
+        }
+        return results;
+    }
+
+
+    /**
      * Runtime: 7ms   11/4/2016
      * Use a flag to node if parent node has two children
      */
@@ -90,8 +116,6 @@ public class Tree257BinaryTreePaths {
         return answer;
     }
 
-    //TODO: Divide and conquer
-    // http://www.jiuzhang.com/solutions/binary-tree-paths/
 
     //https://discuss.leetcode.com/topic/23114/java-solution-using-stringbuilder-instead-of-string-manipulation
     public static void main(String[] args) {

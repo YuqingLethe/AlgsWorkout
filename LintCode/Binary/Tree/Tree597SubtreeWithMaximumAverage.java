@@ -37,7 +37,7 @@ public class Tree597SubtreeWithMaximumAverage {
             sum += rightRT.sum;
             total += rightRT.total;
         }
-        if (maxAvg < (double) sum / total) {
+        if (maxAvg < (double) sum / total) { //这里也可以变为乘法! 就不需要double了
             maxAvg = (double) sum / total;
             maxTree = root;
         }
