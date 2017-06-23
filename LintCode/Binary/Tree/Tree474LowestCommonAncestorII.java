@@ -2,20 +2,14 @@ package LintCode.Binary.Tree;
 
 import java.util.ArrayList;
 
-/**
- * Created by Administrator on 2017/6/18.
- */
-class ParentTreeNode {
-    public ParentTreeNode parent, left, right;
- }
 public class Tree474LowestCommonAncestorII {
     /**
-     * 不要忘了A,B已经给了, 不要再找了.
+     * 不要忘了A,B已经给了, 不要再找了. 2017/6/18.
      * http://www.jiuzhang.com/solution/lowest-common-ancestor-ii/
      * @param root: The root of the tree
      * @param A, B: Two node in the tree
      * @return: The lowest common ancestor of A and B
-     */
+     */  
     public ParentTreeNode lowestCommonAncestorII(ParentTreeNode root,
                                                  ParentTreeNode A,
                                                  ParentTreeNode B) {
