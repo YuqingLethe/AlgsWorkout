@@ -23,8 +23,12 @@ import java.util.List;
  */
 public class BC51NQueens {
     /**
-     * 之前看答案写的不理解, 尤其是valid的函数, 后来看了youtube讲解自己写了一遍, 豁然开朗
      * 2017/6/9
+     * 之前看答案写的不理解, 尤其是valid的函数, 后来看了youtube讲解自己写了一遍, 豁然开朗
+     *
+     * 2017/6/27
+     * 很多细节小错误, 慢慢debug出来. 不过第一次自己写完了.
+     * 是一步步按照思维添加写的, 并坚持先写主体再写不重要的, 感觉还不错.
      */
     public static List<List<String>> solveNQueens(int n) {
         List<List<String>> results = new ArrayList<>();
@@ -42,7 +46,7 @@ public class BC51NQueens {
         }
         for (int i = 0; i < n; i++) {
             if (!valid(nthRow, i)) {
-                continue;
+                continue; //6/27/2017 这里不能用break啊, 不然这一行其他column就不考虑了吗.....
             }
             nthRow.add(i);
             search(n, results, nthRow);

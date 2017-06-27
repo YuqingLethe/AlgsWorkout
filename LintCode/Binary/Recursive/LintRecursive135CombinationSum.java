@@ -26,12 +26,8 @@ public class LintRecursive135CombinationSum {
      解决办法有两个
         2.1 一个是在结果输出前用一个method把重复解去掉
         2.2 另一个是更改传递参数, 让i作为startIdx传递, 这样每次可以i重复使用, 而i之前的不能重复使用. (注意考虑candidates里面自带重复值的情况!)
-     * @param candidates: A list of integers
-     * @param target:An integer
-     * @return: A list of lists of integers
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        // write your code here
         List<List<Integer>> results = new ArrayList<>();
         if (candidates == null || candidates.length == 0) {
             return results;
@@ -47,7 +43,7 @@ public class LintRecursive135CombinationSum {
                         ArrayList<Integer> subset,
                         int startIdx) {
         if (target == 0) {
-            results.add(new ArrayList<Integer>(subset));
+            results.add(new ArrayList<Integer>(subset)); //6.25忘记deep copy
             return;
         }
         if (target < 0) {
@@ -58,6 +54,7 @@ public class LintRecursive135CombinationSum {
                 continue;
             }
             //注意这里, 因为传递参数时已经考虑了重复, 所以这种candidates里面自带重复值的也要去掉
+            //6/25 第二次忘记!
             if (i!= startIdx && candidates[i] == candidates[i - 1]) {
                 continue;
             }

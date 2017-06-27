@@ -3,8 +3,13 @@ package Tree;
 import java.util.*;
 
 public class Tree102BinaryTreeLevelOrderTraversal {
-    //Runtime: 3ms Use: 13min 9/11/2016 Add to the list level by level
-    public  List<List<Integer>> levelOrderByBFS(TreeNode root) {
+
+    /**
+     * 比较完全的四种方法: http://www.jiuzhang.com/solutions/binary-tree-level-order-traversal/
+     * Runtime: 3ms Use: 13min 9/11/2016
+     * Add to the list level by level
+     */
+    public  List<List<Integer>> levelOrderByBFS1(TreeNode root) {
 
         List<Integer> currLevel = new LinkedList<Integer>();//其实可以在while里面定义的，没必要在这里定义
         List<List<Integer>> result = new LinkedList<List<Integer>>();
@@ -27,11 +32,53 @@ public class Tree102BinaryTreeLevelOrderTraversal {
         return result;
     }
 
+    /**
+     * 6/20/2017 BFS iterative with dummy node
+     * With Special TreeNode to tell current level
+     */
+    public ArrayList<ArrayList<Integer>> levelOrderBFS2(TreeNode root) {
+        // write your code here
+        Queue<TreeNode> q = new LinkedList<>();
+        ArrayList<ArrayList<Integer>> results = new ArrayList<>();
+        if (root == null) {
+            return results;
+        }
 
+        q.add(root);
+        TreeNode sp = new TreeNode(-1); //use as a divider of each level
+        q.add(sp);
+        ArrayList<Integer> intList = new ArrayList<>();
 
-    //9/11/2016 Runtime: 4ms Use: 1hr Use BFS but add to the list node-by-node
-    //HOLD 9/7/2016 Cannot use index and 2*n - 1
-    public  List<List<Integer>> levelOrderByBFSWithAddToList(TreeNode root) {
+        while (!q.isEmpty()) {
+            TreeNode tn = q.poll();
+            if (tn == sp) {
+                results.add(intList);
+                if (q.peek() == null) {
+                    break;
+                }
+                intList = new ArrayList<>();
+                q.add(sp);
+                continue;
+            }
+            if (tn.left != null) {
+                q.add(tn.left);
+            }
+            if (tn.right != null) {
+                q.add(tn.right);
+            }
+            //一个q 一个intList, 一个在if里面加, 所以root要提前加入, 一个pop之后再加, 所以在while里面
+            intList.add(tn.val);
+        }
+        return results;
+    }
+
+    /**
+     * 9/11/2016 Runtime: 4ms Use: 1hr
+     * Use BFS but add to the list node-by-node helper: AddToList()
+     * @param root
+     * @return
+     */
+    public  List<List<Integer>> levelOrderByBFS3(TreeNode root) {
 
         List<List<Integer>> result = new LinkedList<List<Integer>>();
         if (root == null) {
@@ -74,9 +121,11 @@ public class Tree102BinaryTreeLevelOrderTraversal {
         return list;
     }
 
-    //Runtime: 1ms  Use: 30min+   Recursive DFS
-    //https://discuss.leetcode.com/topic/7332/java-solution-using-dfs
-    public List<List<Integer>> LevelOrder(TreeNode root) {
+    /**
+     * Runtime: 1ms  Use: 30min+   Recursive DFS
+     * https://discuss.leetcode.com/topic/7332/java-solution-using-dfs
+     */
+    public List<List<Integer>> LevelOrderDFS(TreeNode root) {
         List<List<Integer>> resultLL = new ArrayList<List<Integer>>();
         levelHelper(resultLL, root, 0);
         return resultLL;
@@ -92,9 +141,12 @@ public class Tree102BinaryTreeLevelOrderTraversal {
         levelHelper(res, root.right, height+1);
     }
 
-    //Runtime: 4ms Done on 9/24/2016. Use stack but push right node first.
-    //Pay attention when result.size() <= currHeight
-    public List<List<Integer>> LevelOrderByDFS(TreeNode root) {
+    /**
+     * Runtime: 4ms Done on 9/24/2016. DFS iterative
+     * Use stack but push right node first.
+     * Pay attention when result.size() <= currHeight
+     */
+    public List<List<Integer>> LevelOrderDFS2(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         if (root == null) { return result; }
         Stack<TreeNode> tnStack = new Stack<TreeNode>();
