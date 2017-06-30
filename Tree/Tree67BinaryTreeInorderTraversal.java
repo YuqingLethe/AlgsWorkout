@@ -23,7 +23,7 @@ public class Tree67BinaryTreeInorderTraversal {
             }
             tn = stack.pop();
             result.add(tn.val);
-            tn = tn.right;
+            tn = tn.right; //6/29/2017 这里又忘了, 不能先push, 必须到左边尽头才能push
         }
         return result;
     }
