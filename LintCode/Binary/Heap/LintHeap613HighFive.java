@@ -116,7 +116,7 @@ public class LintHeap613HighFive {
                 allscores.get(r.id).add(r.score);
             }
             //Get the avg scores
-            for (Integer stu : allscores.keySet()) {
+            for (Integer stu : allscores.keySet()) {  //也可以用entrySet() 然后通过stu的getValue()和getKey()
                 double sum = 0.0;
                 int tops = topN;
                 while(tops-- > 0) {
