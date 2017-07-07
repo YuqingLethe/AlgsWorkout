@@ -42,7 +42,6 @@ public class LintRecursive15Permutation {
             subset.remove(subset.size() - 1);
         }
     }
-
     /**
      * @param nums: A list of integers.
      * @return: A list of permutations.
