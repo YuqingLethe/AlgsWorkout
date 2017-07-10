@@ -50,4 +50,29 @@ public class LintBinary39RecoverRotatedSortedArray {
             nums.add(0, tmpArr[i]);
         }
     }
+
+    /**
+     * 7/10/2017Two pointers, each time move one step
+     */
+    public void recoverRotatedSortedArrayTP(ArrayList<Integer> nums) {
+        if (nums == null || nums.size() < 2) {
+            return;
+        }
+        int i = 0;
+        //注意这里i + 1考虑溢出  以及 <= 而非 <
+        while(i < nums.size() - 1 && nums.get(i) <= nums.get(i + 1)) {
+            i++;
+        }
+
+        int restLen = nums.size() - i - 1;
+
+        while(i >= 0) {
+            int crt = nums.get(i);
+            for (int j = 0; j < restLen; j++) {
+                nums.set(i + j, nums.get(i + j + 1));
+            }
+            nums.set(i + restLen, crt);
+            i--;
+        }
+    }
 }

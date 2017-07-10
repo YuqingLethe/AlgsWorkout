@@ -44,4 +44,32 @@ public class LintString8RotateString {
             str[j] = temp;
         }
     }
+
+    /**
+     * 7/10/2017用stringbuidler写, 多此一举..... 有build-in方法
+     */
+    public void rotateStringBuilder(char[] str, int offset) {
+
+        if (str == null || str.length  <= 1) {
+            return;
+        }
+        offset = offset % str.length; //这个不能写在corner case前面
+        if (offset == 0) {
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (; i < str.length - offset; i++) {
+            sb.append(str[i]);
+        }
+        for (; i < str.length; i++) {
+            sb.insert(i + offset - str.length, str[i]);
+
+        }
+        char[] ans = sb.toString().toCharArray();
+        for (int j = 0; j < str.length; j++) {
+            str[j] = ans[j];
+        }
+    }
 }
