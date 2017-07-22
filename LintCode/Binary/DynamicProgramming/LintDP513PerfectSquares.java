@@ -7,8 +7,7 @@ import java.util.Arrays;
  */
 public class LintDP513PerfectSquares {
     /**
-     * @param n a positive integer
-     * @return an integer
+     * 2017/7/17 看答案坐的
      */
     public int numSquares(int n) {
         // Write your code here
