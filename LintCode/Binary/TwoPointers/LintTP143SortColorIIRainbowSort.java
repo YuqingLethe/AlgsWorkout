@@ -45,4 +45,6 @@ public class LintTP143SortColorIIRainbowSort {
             rainbowSort(colors, l, right, colorMid + 1, colorTo);
         }
     }
+
+    //todo: O(n^k) method like 148 sort colors
 }
