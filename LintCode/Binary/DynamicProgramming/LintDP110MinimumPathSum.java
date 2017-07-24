@@ -25,10 +25,19 @@ public class LintDP110MinimumPathSum {
 
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < m; j++) {
-                f[i][j] = Math.min(f[i - 1][j], f[i - 1][j]) + grid[i][j];
+                f[i][j] = Math.min(f[i - 1][j], f[i][j - 1]) + grid[i][j];
             }
         }
 
         return f[n - 1][m - 1];
+    }
+    private void print(int[][] grid) {
+        int m = grid[0].length;
+        for (int i = 0 ; i < grid.length; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }

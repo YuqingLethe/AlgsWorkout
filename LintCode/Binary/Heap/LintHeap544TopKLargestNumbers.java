@@ -95,5 +95,5 @@ public class LintHeap544TopKLargestNumbers {
             }
             return ans;
         }
-    };
+    }
 }
