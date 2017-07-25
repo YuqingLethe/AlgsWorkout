@@ -1,11 +1,11 @@
-package LintCode.Binary.Recursive;
+package Math;
 
 /**
  * Created by Administrator on 2017/7/24.
  */
-public class LintRecursion52NextPermutation {
+public class LintMath52NextPermutation {
     /**
-     * 7/23/2017 找规律解法
+     * 2017/7/24找规律解法
      后来才发现原来是数学中的排列组合，比如“1，2，3”的全排列，依次是：
      1 2 3
      1 3 2
@@ -16,7 +16,7 @@ public class LintRecursion52NextPermutation {
      每一列的数都是可用数的从小到大排列
 
      因此, 下一个排列组合一定是从最后一个增序开始, 与其后面第二小的交换, 然后后面的增序排列.
-
+     http://blog.csdn.net/nomasp/article/details/49913627
      Good test case: [6 ,5, 4 ,8, 7, 5 ,1]
      */
     public class SolutionPattern {
@@ -75,6 +75,7 @@ public class LintRecursion52NextPermutation {
         }
     }
     /**
+     * 2017/7/24
      * 九章的找规律解法, 和上面的略有不同. 找到最后的增序之后先排列再swap, 这样找到第二小的比较方便
      */
     //todo: write my own
@@ -112,6 +113,4 @@ public class LintRecursion52NextPermutation {
             }
         }
     }
-
-
 }
