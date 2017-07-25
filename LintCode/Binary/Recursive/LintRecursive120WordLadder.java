@@ -13,7 +13,7 @@ public class LintRecursive120WordLadder {
         if (dict == null) {
             return 0;
         }
-        if (start.equals(end)) { //这个特别之处也要注意, 后面没有处理.
+        if (start.equals(end)) { ////这个不能少, 不然加进去程序先找的是neighbors,就不知道几个了...
             return 1;
         }
 
@@ -74,5 +74,28 @@ public class LintRecursive120WordLadder {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 用char array来重建string 7/23/2017
+     */
+    private ArrayList<String> getNext(String word, Set<String> dict) {
+        ArrayList<String> ans = new ArrayList<>();
+        for (int i = 0; i < word.length(); i++) {
+            for (char c = 'a'; c <= 'z'; c++) {
+                String newS = replaceLetter(word, i, c); //原word也被加到了neighbor里, 但是被主程序过滤了, 因此无事
+                if (dict.contains(newS)) {
+                    ans.add(newS);
+                }
+            }
+        }
+        return ans;
+    }
+
+
+    private String replaceLetter(String word, int idx, char c) {
+        char[] charArray = word.toCharArray();
+        charArray[idx] = c;
+        return new String(charArray);
     }
 }
