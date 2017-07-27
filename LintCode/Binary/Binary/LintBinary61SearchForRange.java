@@ -67,6 +67,59 @@ public class LintBinary61SearchForRange {
         }
         return ans;
     }
+
+    /**
+     * 7/26/2017
+     * 1. 对模板的理解加深了, while循环后的比较很自如
+     * 2. 一旦if里面有了return 就不用else了, 逻辑更清晰
+     * 3. 把boundary直接让hi或者lo扛, 比如left boundary的时候直接hi == lo
+     *  这样定义更清晰, 代码也简洁
+     */
+    public int[] searchRange2(int[] A, int target) {
+        int[] ans = new int[2];
+        ans[0] = -1;
+        ans[1] = -1;
+
+        if (A == null || A.length == 0) {
+            return ans;
+        }
+
+        //Find the left boundary, make hi equals its index
+        int lo = 0;
+        int hi = A.length - 1;
+        while(lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (A[mid] < target) {
+                lo = mid;
+            } else {
+                hi = mid;
+            }
+        }
+        if (A[hi] != target && A[lo] != target) {
+            return ans;
+        }
+        if (A[lo] == target) {
+            hi = lo;
+        }
+        ans[0] = hi;
+
+        //Find the right boundary, make lo equals its index
+        lo = ans[0];
+        hi = A.length - 1;
+        while(lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (A[mid] > target) {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+        if (A[hi] == target) {
+            lo = hi;
+        }
+        ans[1] = lo;
+        return ans;
+    }
     //Some great test cases:
     public static void main(String[] args) {
         int[] test1 = {5,5,5,5};
