@@ -5,9 +5,7 @@ package LintCode.Binary.Binary;
  */
 public class LintBinary28SearchA2DMatrix {
     /**
-     * @param matrix, a list of lists of integers
-     * @param target, an integer
-     * @return a boolean, indicate whether matrix contains target
+     * 2017/5/30
      */
     public static boolean searchMatrix(int[][] matrix, int target) {
         // 很聪明的对付空集的办法, 无论多少维
@@ -23,7 +21,7 @@ public class LintBinary28SearchA2DMatrix {
         int hi = m * n - 1;
         while (lo  + 1 < hi) { //因为会有找不到target的情况, 所以当low == hi的是时候可能会陷入死循环. 因此要这么写
             int mid = lo + (hi - lo) / 2;
-            int i = mid / m;
+            int i = mid / m; //7/27/2017 又写错了, 都是m, 不用n啊
             int j = mid % m;
             if (matrix[i][j] < target) {
                 lo = mid;
@@ -34,6 +32,7 @@ public class LintBinary28SearchA2DMatrix {
             }
         }
         //下面这个情况完全是因为上面lo + 1 < hi的终止条件才有的
+        //7/26/2017 忘记了查找lo的情况, 还是对模板理解不深
         if (matrix[lo / m][lo % m] == target
                 || matrix[hi / m][hi % m] == target) {
             return true;
