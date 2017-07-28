@@ -7,8 +7,7 @@ public class LintBianry159FindMinimumInRotatedSortedArray {
     //本题实际考察的是最坏情况的判断!!
     // 关联题目LintBinary39
     /**
-     * @param nums: a rotated sorted array
-     * @return: the minimum number in the array
+     * @2017/5/31
      */
     public int findMin(int[] nums) {
         // 首次写13min提交 一次ac
@@ -96,5 +95,30 @@ public class LintBianry159FindMinimumInRotatedSortedArray {
                 min = num[i];
         }
         return min;
+    }
+
+    /**
+     * 2017/7/27
+     * 自己用的模板的写法 别忘了while里面比较的是nums[mid] 不是mid -_-||
+     */
+    public int findMinTemplate(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        int lo = 0;
+        int hi  = nums.length - 1;
+        int last = nums[hi];
+        while (lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] > last) {
+                lo = mid;
+            } else {
+                hi = mid;
+            }
+        }
+        if (nums[lo] <= nums[hi]) {
+            return nums[lo];
+        }
+        return nums[hi];
     }
 }

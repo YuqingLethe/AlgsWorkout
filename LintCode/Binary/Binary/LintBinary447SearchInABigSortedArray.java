@@ -18,11 +18,9 @@ class ArrayReader {
 }
 public class LintBinary447SearchInABigSortedArray {
     /**
-     * @param reader: An instance of ArrayReader.
-     * @param target: An integer
-     * @return : An integer which is the index of the target number
+     * 2017/6/1
      */
-    public static int searchBigSortedArray(ArrayReader reader, int target) {
+    public static int searchBigSortedArray1(ArrayReader reader, int target) {
         int idx = 1;
         //很妙, 没必要用<= 如果有多个重复数字. 只需要找到第一个即可.
         // 从idx - 1 避免了这个case to : [1,3,6,9,21], 3
@@ -46,6 +44,42 @@ public class LintBinary447SearchInABigSortedArray {
         } else {
             return -1;
         }
+    }
+
+    /**
+     * 2017/7/27
+     */
+    public int searchBigSortedArray2(ArrayReader reader, int target) {
+        if (reader == null) {
+            return -1;
+        }
+        int upper = 1;
+        //[1,2,3,4,5], 5
+        while(reader.get(upper) < target) {
+            upper *= 2;
+
+        }
+        while (reader.get(upper) == Integer.MAX_VALUE) {
+            upper --;
+        }
+        int lo = upper / 2;
+        int hi = upper;
+        while(lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (reader.get(mid) < target)  {
+                lo = mid;
+            } else {
+                hi = mid;
+            }
+        }
+        if (reader.get(lo) == target) {
+            return lo;
+        }
+        if (reader.get(hi) == target) {
+            return hi;
+        }
+
+        return -1;
     }
 
     public static void main(String[] args) {
