@@ -25,6 +25,35 @@ public class Binary69SqrtX {
         return l - 1;
     }
 
+    /**
+     * 7/27/2017
+     * 另一种处理被除数是0的方法
+     */
+    public int mySqrt2(int x) {
+        int lo = 0;
+        int hi = x;
+        if (x == 0) {
+            return 0;
+        }
+        while (lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (mid == 0 || mid < x / mid) { //Failed: 0
+                lo = mid;
+            } else if (mid > x / mid) {
+                hi = mid;
+            } else {
+                return mid;
+            }
+        }
+        if (hi <= x / hi) {
+            return hi;
+        }
+        if (lo <= x / lo) {
+            return lo;
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         int x = 1025;
         System.out.println(mySqrt(x));

@@ -41,4 +41,51 @@ public class Binary81SearchInRotatedSortedArrayII {
         }
         return false;
     }
+
+    /**
+     * 7/27/2017
+     * 先把与分割点重复的数字做个处理, 掐头去尾
+     * 再做类似于无重复的SearchInRotatedSortedArrayI来处理.
+     * 因为即便nums[index] == target 也是lo或者hi从此固定在target的值那里,最后会判断的
+     */
+    public boolean search2(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        int lo = 0;
+        int hi = nums.length - 1;
+        int last = nums[nums.length - 1];
+        while (hi > 0 && nums[hi - 1] == last) { //[1], 0 只要nums[Idx - 1]就要添加条件!
+            hi --;
+        }
+        while (lo < hi && nums[lo] == last) {
+            lo ++;
+        }
+        while (lo + 1 < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] == target) {
+                return true;
+            }
+            if (nums[mid] > last) {
+                if (nums[mid] < target || target <= last) {
+                    lo = mid;
+                } else  {
+                    hi = mid;
+                }
+            } else {
+                if (nums[mid] > target || target > last) {
+                    hi = mid;
+                } else {
+                    lo = mid;
+                }
+            }
+        }
+        if (nums[lo] == target) {
+            return true;
+        }
+        if (nums[hi] == target) {
+            return true;
+        }
+        return false;
+    }
 }
