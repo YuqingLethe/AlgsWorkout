@@ -18,7 +18,7 @@ public class Binary154FindMinimumInRotatedSortedArray {
     }
 
     /**
-     * 6/5/2017
+     * 6/5/2017 7/28/2017
      */
     public int findMinFakeBinary(int[] num) {
         int lo = 0;

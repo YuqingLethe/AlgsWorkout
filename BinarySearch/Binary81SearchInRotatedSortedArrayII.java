@@ -58,7 +58,7 @@ public class Binary81SearchInRotatedSortedArrayII {
         while (hi > 0 && nums[hi - 1] == last) { //[1], 0 只要nums[Idx - 1]就要添加条件!
             hi --;
         }
-        while (lo < hi && nums[lo] == last) {
+        while (lo < hi && nums[lo] == last) { //7/28/2017  不用掐头其实 while里面第二个if改成>=即可
             lo ++;
         }
         while (lo + 1 < hi) {
@@ -66,7 +66,7 @@ public class Binary81SearchInRotatedSortedArrayII {
             if (nums[mid] == target) {
                 return true;
             }
-            if (nums[mid] > last) {
+            if (nums[mid] > last) { //改成>= 不用掐头
                 if (nums[mid] < target || target <= last) {
                     lo = mid;
                 } else  {
