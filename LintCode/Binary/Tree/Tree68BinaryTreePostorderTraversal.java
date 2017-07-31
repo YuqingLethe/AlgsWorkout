@@ -1,4 +1,6 @@
-package Tree;
+package LintCode.Binary.Tree;
+
+import Tree.*;
 
 import java.util.*;
 
