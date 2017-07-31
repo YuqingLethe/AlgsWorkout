@@ -1,4 +1,4 @@
-package Tree;
+package LintCode.Binary.Tree;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -12,7 +12,7 @@ public class Tree67BinaryTreeInorderTraversal {
      */
     public ArrayList<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<>();
-        Stack<TreeNode> stack =  new Stack<TreeNode>();
+        Stack<TreeNode> stack =  new Stack<>();
         TreeNode tn = root;
         while (tn != null || !stack.empty()) {//是或啊!
             //6/29/2017 又不会写了.....  注意这里加入和指针移动的先后
