@@ -8,49 +8,51 @@ import java.util.List;
  */
 public class Tree246BinaryTreePathSumII {
     /**
-     * @param root the root of binary tree
-     * @param target an integer
-     * @return all valid paths
+     * 7/30
+     * 这一遍才写对. 答案真是聪明. 给了我们教训, recursion的list里面不仅可以存储答案, 也可以存储路径, 即便
+     * 不是答案的路径. 这样for循环就可以直接找到答案啦
      */
-    int ultimateTarget;
-    public List<List<Integer>> binaryTreePathSum2(TreeNode root, int target) {
-        List<List<Integer>> results = new ArrayList<>();
-        if (root == null) {
+    public class Solution {
+        public List<List<Integer>> binaryTreePathSum2(TreeNode root, int target) {
+            List<List<Integer>> results = new ArrayList<>();
+            if (root == null) {
+                return results;
+            }
+            List<Integer> list = new ArrayList<>();
+            helper(root, target, 0, list, results);
             return results;
         }
-        ultimateTarget = target; //注意初始化的位置, 如果ultimateTarget为全局变量, 只能在这里找到target帮之初始化
-        ArrayList<Integer> path = new ArrayList<>();
-        helper(root, target, path, results);
-        return results;
-    }
-    private void helper(TreeNode root,
-                        int target,
-                        ArrayList<Integer> path,
-                        List<List<Integer>> results) {
-        if (target == root.val) {
-            path.add(root.val);
-            results.add(new ArrayList<Integer>(path));
-            path.remove(path.size() - 1);
-        }
-        path.add(root.val);
-        if (root.left != null) {
-            helper(root.left, target - root.val, path, results);
-            //这里别忘了, 如果相等的话就没必要输出了, 不然会重复!! {1,-2,#,1,#,2}, 2
-            //而且不能用target == ultimateTarget不然子节点就不会再往下走了 {1,2,3,4,#,2}, 6
-            if (target - root.val != ultimateTarget) {
-                ArrayList<Integer> tmpPath = new ArrayList<>();
-                helper(root.left, ultimateTarget, tmpPath, results);
+        //level的作用是当前的层数，也就是他的祖先节点们在buffer数组里的位置。
+        //findsum里面 for loop 表示沿着这个点往上走的路径，也就是固定了路径的终点，起点未知。
+        private void helper(TreeNode root,
+                            int target,
+                            int level,
+                            List<Integer> list,
+                            List<List<Integer>> results) {
+            if (root == null) {
+                return;
             }
-        }
-        if (root.right != null) {
-            helper(root.right, target - root.val, path, results);
-            if (target - root.val != ultimateTarget) {
-                ArrayList<Integer> tmpPath = new ArrayList<>();
-                //这里(本该left就写), 不能用当前的target来代替, 因为当前target在循环中会变!! {1,-2,#,1,#,2}, 2
-                helper(root.right, ultimateTarget, tmpPath, results);
+            list.add(root.val);
+            int tmpSum = target;
+            for (int i = level; i >= 0; i --) {
+                tmpSum -= list.get(i);
+                if (tmpSum == 0) {
+                    //注意这个_list.subList()函数, Returns a view of the portion of this list因此要初始化
+                    List<Integer> newlist = new ArrayList<Integer>(list.subList(i, level + 1));
+                    results.add(newlist);
+                }
             }
+
+            helper(root.left, target, level + 1, list, results);
+            helper(root.right, target, level + 1, list, results);
+            list.remove(list.size() - 1);
         }
-        path.remove(path.size() - 1);
+        private void print(List<Integer> list) {
+            for (Integer i : list) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
     }
 
     /**

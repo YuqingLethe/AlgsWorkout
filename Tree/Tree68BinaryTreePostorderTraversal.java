@@ -1,17 +1,31 @@
 package Tree;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/6/29.
  */
 public class Tree68BinaryTreePostorderTraversal {
     /**
+     * Divide and conquer真的太好用了
+     */
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> results = new ArrayList<>();
+        if (root == null) {
+            return results;
+        }
+        results.addAll(postorderTraversal(root.left));
+        results.addAll(postorderTraversal(root.right));
+        results.add(root.val);
+
+        return results;
+    }
+
+    /**
      * @param root: The root of binary tree.
      * @return: Postorder in ArrayList which contains node values.
      */
-    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+    public ArrayList<Integer> postorderTraversa2(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         TreeNode curr = root;
@@ -39,6 +53,28 @@ public class Tree68BinaryTreePostorderTraversal {
                 result.add(curr.val);
             }
             prev = curr;
+        }
+        return result;
+    }
+
+    /**
+     * 看不懂 7/30/2017
+     * 用迭代方法实现postorder
+     * https://www.jiuzhang.com/qa/3011/
+     */
+    public LinkedList<Integer> postorderTraversal3(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode p = root;
+        while (!stack.isEmpty() || p != null) {
+            if (p != null) {
+                stack.push(p);
+                result.addFirst(p.val); // Reverse the process of preorder
+                p = p.right; // Reverse the process of preorder
+            } else {
+                TreeNode node = stack.pop();
+                p = node.left; // Reverse the process of preorder
+            }
         }
         return result;
     }
