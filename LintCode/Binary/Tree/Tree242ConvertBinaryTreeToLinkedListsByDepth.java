@@ -25,7 +25,7 @@ public class Tree242ConvertBinaryTreeToLinkedListsByDepth {
             int size = qu.size();
             dummy.next = null;
             lastNode = dummy;
-            for (int i = 0; i < size; i++)  {
+            for (int i = 0; i < size; i++)  { //注意while里面用size不是index, 不能为0
                 TreeNode tn = qu.poll();
                 lastNode.next = new ListNode(tn.val);
                 lastNode = lastNode.next;
