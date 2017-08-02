@@ -31,7 +31,7 @@ public class Tree378ConvertBinarySearchTreeToDoublyLinkedList {
             dln.next = tmp;
             tmp.prev = dln;
         }
-        while (dln.prev != null) {
+        while (dln.prev != null) { //直接记住leftHead也可以
             dln = dln.prev;
         }
         return dln;
