@@ -7,9 +7,6 @@ public class LIntGraph605SequenceReconstruction {
      * 2017/7/1.
      * 读题目: 注意这个seqs可以是任意n*m 而非n*2
      * 读题目: 每一个值不可为0, 可以为n
-     * @param org a permutation of the integers from 1 to n
-     * @param seqs a list of sequences
-     * @return true if it can be reconstructed only one or false
      */
     public boolean sequenceReconstruction(int[] org, int[][] seqs) {
         // Write your code here
