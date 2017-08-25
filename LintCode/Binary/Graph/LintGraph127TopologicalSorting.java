@@ -10,9 +10,8 @@ import java.util.Queue;
  */
 public class LintGraph127TopologicalSorting {
     /**
-     * 错误思路
-     * @param graph: A list of Directed graph node
-     * @return: Any topological order for the given graph.
+     * 错误思路1: hashmap里面有的degree level是0 冗余   + 不能改变graph的size
+     *
      */
     public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
         // write your code here
@@ -57,6 +56,66 @@ public class LintGraph127TopologicalSorting {
             }
         }
         return results;
+    }
+    /**
+     * 8/23
+     * 错误思路2: HashMap build的时候按照left degree的顺序决定next的degree,
+     */
+    public class Solution {
+        public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
+            ArrayList<DirectedGraphNode> results = new ArrayList<>();
+            if (graph == null || graph.size() == 0) {
+                return results;
+            }
+            //build the degree hashmap
+            HashMap<DirectedGraphNode, Integer> level = new HashMap<>();
+            for (DirectedGraphNode left : graph) {
+                int leftDeg = 0;
+                if (level.containsKey(left)) {
+                    leftDeg = level.get(left);
+                }
+                System.out.println("left.label=" + left.label + "  leftDeg=" + leftDeg);
+                for (DirectedGraphNode right : left.neighbors) {
+                    int rightDeg = 0;
+                    if (level.containsKey(right)) {
+                        rightDeg = level.get(right);
+                    }
+                    if (rightDeg < leftDeg + 1) {
+                        rightDeg = leftDeg + 1;
+                        level.put(right, rightDeg);
+                    }
+                    System.out.println("      right.label=" + right.label + " rightDeg=" + rightDeg);
+                }
+            }
+
+            //find the 0 level
+            Queue<DirectedGraphNode> q = new LinkedList<>();
+            for (DirectedGraphNode node : graph) {
+                if (!level.containsKey(node)) {
+                    q.offer(node);
+                    results.add(node);
+                }
+            }
+
+            //find others by level
+            //Bug: 答案是[0,2,1,4]   掠过了3
+            //所以只需要让neighbor是以node为其实level + 1即可 需要死记硬背一下答案的hashmapbuild方法
+            int degree = 1;
+            while (!q.isEmpty())  {
+                DirectedGraphNode node = q.poll();
+                System.out.println(node.label);
+                for (DirectedGraphNode next : node.neighbors) {
+
+                    if (level.get(next) - degree == 0) {
+                        results.add(next);
+                        q.offer(next); //重大bug, 无论level degree到没到0, 都要offer
+                    }
+                }
+                degree ++;
+            }
+
+            return results;
+        }
     }
 
     /**
