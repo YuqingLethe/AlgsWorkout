@@ -98,4 +98,58 @@ public class LintRecursive120WordLadder {
         charArray[idx] = c;
         return new String(charArray);
     }
+
+    /**
+     * 8/25一遍bug free啦 虽然没必要粘贴但还是放过来了. 比较简洁
+     */
+    public class Solution {
+        public int ladderLength(String start, String end, Set<String> dict) {
+            if (dict == null || dict.size() == 0) {
+                return 0;
+            }
+            if (start.equals(end)) {
+                return 1;
+            }
+            dict.add(start);
+            dict.add(end);
+
+
+            Queue<String> q = new LinkedList<>();
+            HashSet<String> pool = new HashSet<>();
+            q.offer(start);
+            pool.add(start);
+            int path = 2;
+            while (!q.isEmpty()) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
+                    String s = q.poll();
+                    for (String next : neighbors(s, dict)) {
+                        if (pool.contains(next)) {
+                            continue;
+                        }
+                        if (end.equals(next)) {
+                            return path;
+                        }
+                        q.offer(next);
+                        pool.add(next);
+                    }
+                }
+                path++;
+            }
+            return 0;
+        }
+
+        private ArrayList<String> neighbors(String s, Set<String> dict) {
+            ArrayList<String> results = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                for (char c = 'a'; c <= 'z'; c++) {
+                    String newS = s.substring(0, i) + Character.toString(c) + s.substring(i + 1, s.length());
+                    if (!newS.equals(s) && dict.contains(newS)) {
+                        results.add(newS);
+                    }
+                }
+            }
+            return results;
+        }
+    }
 }
