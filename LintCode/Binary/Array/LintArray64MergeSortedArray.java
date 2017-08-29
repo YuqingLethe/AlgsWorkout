@@ -78,7 +78,7 @@ public class LintArray64MergeSortedArray {
                     A[idx--] = A[i--];
                 }
             }
-            while(i >= 0) {
+            while(i >= 0) { //8/29 其实这个用不着, 只需要后面那个.
                 A[idx--] = A[i--];
             }
             while(j >= 0) {
