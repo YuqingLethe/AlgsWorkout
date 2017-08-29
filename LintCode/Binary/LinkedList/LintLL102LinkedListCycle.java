@@ -5,10 +5,9 @@ package LintCode.Binary.LinkedList;
  */
 public class LintLL102LinkedListCycle {
     /**
-     * 2017/7/7 用了hashset
+     * 2017/7/7 这样写corner case自动覆盖了
      */
     public boolean hasCycle(ListNode head) {
-        // write your code here
         ListNode fast = head;
         ListNode slow = head;
         while(fast != null && fast.next != null) {
