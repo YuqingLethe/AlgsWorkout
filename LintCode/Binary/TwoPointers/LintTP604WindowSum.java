@@ -5,7 +5,7 @@ package LintCode.Binary.TwoPointers;
  */
 public class LintTP604WindowSum {
     /**
-     * 2017/7/10
+     * 2017/7/10  9/3想起了k的corner case
      */
     public class Solution {
 
