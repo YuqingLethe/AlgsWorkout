@@ -73,6 +73,32 @@ public class String125ValidPalindrome {
         }
         return true;
     }
+
+	public class SolutionLintcode {
+		public boolean isPalindrome(String s) {
+			// Write your code here
+			int i = 0, j = s.length() - 1;
+			while(i < j) {
+				char left = s. charAt(i);
+				char right = s.charAt(j);
+
+				if (!Character.isLetter(left) && !Character.isDigit(left)) { //9/12应该用&&啊低级错误
+					i++;
+					continue;
+				}
+				if (!Character.isLetter(right) && !Character.isDigit(right)) {
+					j--;
+					continue;
+				}
+				if (Character.toLowerCase(left) != Character.toLowerCase(right)) {
+					return false;
+				}
+				i++;
+				j--;
+			}
+			return true;
+		}
+	}
 	
 	private static boolean notAlphaNumeric(char x) {
 		if ((x >= 48 && x <= 57) || (x >= 65 && x <= 90) || (x >= 97 && x <= 122)) {
