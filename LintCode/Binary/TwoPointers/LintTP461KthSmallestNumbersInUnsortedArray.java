@@ -5,7 +5,7 @@ package LintCode.Binary.TwoPointers;
  */
 public class LintTP461KthSmallestNumbersInUnsortedArray {
     /**
-     * @9/16/2017 答案解法, 比我的简单
+     * 9/16/2017 答案解法, 比我的简单
      */
     public class SolutionSolution {
         public int kthSmallest(int k, int[] nums) {
