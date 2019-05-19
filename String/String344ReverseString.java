@@ -1,15 +1,13 @@
 package String;
 
 /**
- * Created by Yoki on 2016/4/23.
+ * Take Away:
+ * 双指针比length - 1 - i找右边的强,准确.
  */
 public class String344ReverseString {
-
     /**
      * Method 1: 3ms <br>
      *     Exchange in char array;
-     * @param s
-     * @return
      */
     public static String reverseString(String s) {
         int i = 0; //pointer from left
@@ -28,8 +26,6 @@ public class String344ReverseString {
     /**
      * Method 2: 12ms <br>
      * StringBuffer and substring.
-     * @param s The input string
-     * @return the reversed string
      */
     private static String reverseString2(String s) {
         int n = s.length();
@@ -46,8 +42,24 @@ public class String344ReverseString {
         return strb.substring(n - 1);
     }
 
+    /**
+     * Write a function that takes a string as input and returns the string reversed.
+     * Method 3: This is the Worst way to do it
+     */
+    public static String reverseString2019(String s) {
+        char[] ca = s.toCharArray();
+        for (int i = 0; i < ca.length / 2; i++) {
+            char tmp = ca[i];
+            ca[i] = ca[ca.length - 1 - i];
+            ca[ca.length - 1 - i] = tmp;
+        }
+        String result = new String(ca);
+        return result;
+    }
+
     public static void main(String[] args) {
-        String s = "";
-        System.out.println(reverseString2(s));
+        String s = "abcd";
+        String result = reverseString2019(s);
+        System.out.println(result);
     }
 }

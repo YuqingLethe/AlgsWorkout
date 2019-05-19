@@ -1,37 +1,13 @@
 package String;
+/**
+ * Take away
+ * System.out.println(Integer.MAX_VALUE) gives 2147483647
+ * System.out.println(Integer.MIN_VALUE) gives -2147483648
+ *
+ * 用这个把Char变Integer
+ * result = result * 10 + ca[index] - '0';
+ */
 public class String8StringToInteger {
-    /**
-     * Not pass 5/23/2016
-     */
-    private static int myAtoi(String str) {
-        char[] ca = str.toCharArray();
-        int result = 0; //store the Integer result
-        int index = 0; //the index of ca
-        byte negFlag = 0; //if negative
-        if(ca.length == 0)
-            return 0;
-        while(index < ca.length) {
-            if (Character.isDigit(ca[index])) { //cal result with digits
-                if (result == 0 && ca[index] == '0') {
-                } else {
-                    result = result * 10 + ca[index] - '0';
-                }
-            } else if (result == 0){ //deal with symbols before digits
-                if (index == 0) {
-                    if (ca[index] == '-') {
-                        negFlag = 1;
-                    } else if (!(ca[index] == ' ' || ca[index] == '+')) {
-                    }
-                } else {
-                    return 0;
-                }
-            }
-            index++;
-        }
-        if (negFlag == 1)
-            result = 0 - result;
-        return result;
-    }
 
     /**
      * Runtime: 52ms   Use: 85min  10/22/2016
@@ -109,6 +85,45 @@ public class String8StringToInteger {
 
     }
 
+    public static int myAtoi2019(String str) {
+        char[] charArray = str.toCharArray();
+        System.out.println(charArray);
+        int result = 0;
+        boolean minus = false;
+        for (int i = 0; i < charArray.length; i ++) {
+
+            if (charArray[i] == ' ' || charArray[i] == '+') {
+                continue;
+            } else if (charArray[i] == '-') {
+                System.out.println("Found -");
+                minus = true;
+                continue;
+            } else if (!Character.isDigit(charArray[i])) {
+                break;
+            }
+            int addValue =  Character.getNumericValue(charArray[i]);
+            if ( !minus && Integer.MAX_VALUE - result * 10 < addValue) {
+                System.out.println("Positive");
+                return Integer.MAX_VALUE;
+            }
+            System.out.println("result = " + result);
+            System.out.println("addValue = " + addValue);
+            System.out.println("Integer.MIN_VALUE = " + Integer.MIN_VALUE);
+            System.out.println("result + Integer.MIN_VALUE=" + (result*10 + Integer.MIN_VALUE));
+            if (minus && (result * 10 + Integer.MIN_VALUE + addValue > 0)) {
+
+                System.out.println("Minus");
+                return Integer.MIN_VALUE;
+            }
+            result = result * 10 + addValue;
+            System.out.println("final = " + result);
+        }
+        if (minus) {
+            result = 0 - result;
+        }
+        return result;
+    }
+
     /**
      * TODO: Use Count++ and -- to get rid of blank and invalid conditions
      * https://discuss.leetcode.com/topic/55866/3ms-java-really-easy-to-understand
@@ -117,7 +132,7 @@ public class String8StringToInteger {
         return 1;
     }
     public static void main(String[] args) {
-        String s = "9223372036854775809";
-        System.out.println(myAtoiByTrim(s));
+        String s = "-9223372036854775809";
+        System.out.println(myAtoi2019(s));
     }
 }
