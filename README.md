@@ -1,5 +1,9 @@
 # LeetCode_Java
 
+Some of my analysis on CSDN. Then I cannot log my account.
+https://blog.csdn.net/eatbanli?t=1
+
+
 ##### Camp Questions by lectures
 
  Note: <topic_content><le_number>-<li_number>

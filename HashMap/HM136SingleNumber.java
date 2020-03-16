@@ -3,7 +3,7 @@ package HashMap;
 import java.util.LinkedList;
 
 public class HM136SingleNumber {
-    //Time Exceeded 0/28/2016
+    //Time Exceeded 9/28/2016
     private static int singleNumberByMemory(int[] nums) {
         boolean[] code = new boolean[nums.length]; //Has found the duplicate or not
         for (int i = 0; i < nums.length; i++) {
