@@ -46,20 +46,50 @@ public class Tree112PathSum {
 
     /**
      * My Original Thoughts
-     * https://discuss.leetcode.com/topic/59924/non-recursive-using-two-stacks-java
+     * https://leetcode.com/problems/path-sum/discuss/36519/My-Java-solutions-using-Recursion-and-Iteration-(Queue-and-Stack)
      *
      * 20200316又没写出来这个。写出来的思路有:
      * 1. 先判断叶子节点左右都是null的条件
      * 2. 需要一个TreeNode Stack来帮助trace父节点
+     * 用stack解决的方法有许多种。
+     * 解法A: 以上。清晰的解法。遍历过的就pop，没遍历的node都扔进去
+     *        因此那个stack里面最多四个nodes
+     * 解法B: https://leetcode.com/problems/path-sum/discuss/36440/non-recursive-using-two-stacks-java 这个并不清楚，
+     *     node stack里面一直存有效path的path
      * 难点(没想明白的）
      * 1. 怎样得知我们已经遍历了左节点还是右节点？还需要一个boolean stack来告诉我们吗？
-     *      答：并不用，因为binaryTree只有两个子树。只要把查看右节点和pop动作写在一起，
+     *      答：并不用，要搞清楚每个stack到底装什么，每个节点判断完毕不是path就挨个pop，左右不用管，
      * 2. 什么是终结条件？
-     *     答： 终结条件和中间的memory设计有关。但主旨是treenode里面还有，说明还没遍历完，所以不结束。
+     *     答： 终结条件和中间的memory设计有关。但主旨是treenode里面还有，说明还有可能的path，所以不结束。
      * 3. 需要sum stack吗？还是只需要记录当前的值？
-     *     答：强烈建议用stack，因为不断地减加容易乱，不如和node stack一起pop push看得明白。
+     *     答：sum stack的用法要根据node stack的用法来决定。
+     *     如果解法A则必须用stack，因为每个sum stack寸的是走这个path的substraction
+     *     如果解法B则强烈建议用stack但不强制，因为不断地减加容易乱，不如和node stack一起pop push看得明白。
      */
-    public boolean hasPathSumByTwoStack(TreeNode root, int sum) {
+    public boolean hasPathSumStack(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
+        Stack<TreeNode> nodeStack = new Stack<TreeNode>();
+        Stack<Integer> numbers = new Stack<Integer>();
+        nodeStack.push(root);
+        numbers.push(sum); //注意点A 注意这里，每个节点存的是当前节点及以下的和！
+
+        while (!nodeStack.isEmpty()) {
+            TreeNode currNode = nodeStack.pop();
+            Integer currSum = numbers.pop() - currNode.val; //注意点A
+            if (currSum == 0 && currNode.left == null && currNode.right == null) {
+                return true;
+            }
+            if (currNode.left != null) {
+                nodeStack.push(currNode.left);
+                numbers.push(currSum);//注意点A
+            }
+            if (currNode.right != null) {
+                nodeStack.push(currNode.right);
+                numbers.push(currSum);
+            }
+        }
         return false;
 
     }
