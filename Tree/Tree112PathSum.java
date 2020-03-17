@@ -42,8 +42,7 @@ public class Tree112PathSum {
             || root.right != null && leafSum(root.right, currSum, sum);
     }
 
-    //TODO: try this method. One reference provided.
-
+    //TODO: try 解法B的逻辑
     /**
      * My Original Thoughts
      * https://leetcode.com/problems/path-sum/discuss/36519/My-Java-solutions-using-Recursion-and-Iteration-(Queue-and-Stack)
