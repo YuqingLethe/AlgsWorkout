@@ -43,19 +43,92 @@ public class LintHeap545TopKLargestNumbersII {
 
             return list;
         }
-/*
-    class comp implements Comparator<Integer> {
-        @Override
-        public int compare (Integer a, Integer b) {
-            if (a < b) {
-                return 1;
-            } else if (a > b) {
-                return -1;
-            } else {
-                return 0;
+    }
+
+    /**
+     * MaxHeap + comparator class
+     */
+    public class Solution2 {
+        PriorityQueue<Integer> pq;
+        int k;
+        public Solution2(int k) {
+            this.k = k;
+            pq = new PriorityQueue<Integer> (k, new comp());
+        }
+
+        class comp implements Comparator<Integer> {
+            @Override
+            public int compare (Integer a, Integer b) {
+                if (a < b) {
+                    return 1;
+                } else if (a > b) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             }
         }
+
+        public void add(int num) {
+            pq.add(num);
+        }
+
+        public List<Integer> topk() {
+            List<Integer> list = new ArrayList<>();
+            int size = pq.size() < k ? pq.size() : k;
+
+            for (int i = 0; i < size; i++) {
+                list.add(pq.poll());
+            }
+            for (int i = 0; i < size; i++) {
+                pq.add(list.get(i));
+            }
+            return list;
+        }
     }
-*/
-    };
+
+    /**
+     * Anonymous Comparator class + minHeap
+     */
+    public class Solution3 {
+        PriorityQueue<Integer> pq;
+        int k;
+        public Solution3(int k) {
+            // anonymous Comparator class
+            this.k = k;
+            pq = new PriorityQueue<Integer> (k, new Comparator<Integer>() {
+                public int compare(Integer a, Integer b) {
+                    if (a < b) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+
+        }
+
+        public void add(int num) {
+            Integer smallest = pq.peek();
+            if (pq.size() < k) {
+                pq.add(num);
+            } else if (smallest < num) {
+                pq.poll();
+                pq.add(num);
+            }
+        }
+
+        public List<Integer> topk() {
+            List<Integer> list = new ArrayList<>();
+            int size = pq.size() < k ? pq.size() : k;
+
+            for (int i = 0; i < size; i++) {
+                list.add(0, pq.poll());
+            }
+            for (int i = 0; i < size; i++) { //poll()完了之后要再加一遍
+                pq.add(list.get(i));
+            }
+            return list;
+        }
+    }
 }

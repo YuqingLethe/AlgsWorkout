@@ -1,7 +1,7 @@
 package Stack;
 import java.util.Stack;
 public class Stack232ImplementQueueUsingStacks {
-    private Stack<Integer> si = new Stack<>();
+    private Stack<Integer> si = new Stack<Integer>();
 
     // Push element x to the back of queue.
     public void push(int x) {
@@ -10,7 +10,7 @@ public class Stack232ImplementQueueUsingStacks {
 
     // Removes the element from in front of queue.
     public void pop() {
-        Stack<Integer> temp = new Stack<>();
+        Stack<Integer> temp = new Stack<Integer>();
         while (si.size() != 0 && si.size() > 1) {
             temp.push(si.pop());
         }
@@ -24,7 +24,7 @@ public class Stack232ImplementQueueUsingStacks {
 
     // Get the front element.
     public int peek() {
-        Stack<Integer> temp = new Stack<>();
+        Stack<Integer> temp = new Stack<Integer>();
         while (si.size() != 0 && si.size() > 1) {
             temp.push(si.pop());
         }
