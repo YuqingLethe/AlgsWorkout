@@ -1,7 +1,7 @@
 package Array;
 
 /**
- * Created by yuqing on 1/31/21.
+ * Created Lethe on 1/31/21.
  */
 public class Array1437CheckIfAllOnesAtLeastLengthKPlacesAway {
     public boolean kLengthApart(int[] nums, int k) {
