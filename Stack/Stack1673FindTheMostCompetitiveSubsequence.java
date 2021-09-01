@@ -17,7 +17,7 @@ public class Stack1673FindTheMostCompetitiveSubsequence {
         if (k == 0 || nums == null) {
             return null;
         }
-        if (k == 1 && nums.length == 1) {ß
+        if (k == 1 && nums.length == 1) {
             return nums;
         }
         int[] res = new int[k];
