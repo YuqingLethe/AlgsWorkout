@@ -39,4 +39,34 @@ public class Binary154FindMinimumInRotatedSortedArray {
             return num[lo];
         }
     }
+
+    /**
+     * To summarize, this algorithm differs to the classical binary search algorithm in two parts:
+     *
+     * We use the upper bound of search scope as the reference for the comparison with the pivot element, while in the classical binary search the reference would be the desired value.
+     * When the result of comparison is equal (i.e. Case #3), we further move the upper bound, while in the classical binary search normally we would return the value immediately.
+     */
+    class BestSolution {
+        public int findMin(int[] nums) {
+            int N = nums.length - 1;
+            int start = 0;
+            int end = N;
+            while (start <= end) {
+                int mid = start + (end - start) / 2;
+                // System.out.println("start=" + start + " end=" + end);
+                // System.out.println("mid = " + mid + " nums[mid]=" + nums[mid]);
+                if (nums[mid] < nums[end]) {
+                    end = mid;
+                } else if (nums[mid] > nums[end]) {
+                    start = mid + 1;
+                } else {
+                    end -= 1;
+                }
+                // System.out.println("Finish status: start=" + start + " end=" + end);
+                // System.out.println("______");
+
+            }
+            return nums[start];
+        }
+    }
 }
