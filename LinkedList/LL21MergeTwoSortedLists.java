@@ -48,6 +48,29 @@ public class LL21MergeTwoSortedLists {
         }
         return head;
     }
+	public ListNode Jan2022(ListNode list1, ListNode list2) {
+		ListNode dummy = new ListNode(0);
+		ListNode p1 = list1;
+		ListNode p2 = list2;
+		ListNode p3 = dummy;
+		while (p1 != null || p2 != null) {
+			if (p1 == null && p2 != null) {
+				p3.next = p2;
+				p2 = p2.next;
+			} else if (p2 == null && p1 != null) {
+				p3.next = p1;
+				p1 = p1.next;
+			} else if (p1.val <= p2.val) {
+				p3.next = p1;
+				p1 = p1.next;
+			} else {
+				p3.next = p2;
+				p2 = p2.next;
+			}
+			p3 = p3.next;
+		}
+		return dummy.next;
+	}
 	
 	public static void main (String[] args) {
 		ListNode a = new ListNode(3);
