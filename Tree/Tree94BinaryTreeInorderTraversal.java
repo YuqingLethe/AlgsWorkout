@@ -2,16 +2,60 @@ package Tree;
 
 import LintCode.Binary.Tree.TreeNode;
 //import Tree.TreeNode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Tree94BinaryTreeInorderTraversal {
+
+    class Feb2022MorrisAndStack {
+        public List<Integer> morris(TreeNode root) {
+            List<Integer> result = new ArrayList<>();
+            TreeNode curr = root;
+            while (curr != null) {
+                if (curr.left == null) {
+                    result.add(curr.val);
+                    curr = curr.right;
+                } else { // Traverse left tree
+                    TreeNode predecessor = curr.left;
+                    while (predecessor.right != null && predecessor.right != curr) {
+                        predecessor = predecessor.right;
+                    }
+                    if (predecessor.right == null) { //這是第一遍visit, 左邊還沒寫入, 若preorder則這個時候寫入result
+                        predecessor.right = curr;
+                        curr = curr.left;
+                    } else { //等於curr說明是第二遍visit, 說明左子樹已經被寫入了, inorder則這時寫入result
+                        predecessor.right = null;
+                        result.add(curr.val);
+                        curr = curr.right;
+                    }
+                }
+            }
+
+            return result;
+        }
+        public List<Integer> stack(TreeNode root) {
+            List<Integer> output = new ArrayList<>();
+            if (root == null) {
+                return output;
+            }
+            Deque<TreeNode> stack = new ArrayDeque<>();
+            TreeNode curr = root;
+            while (!stack.isEmpty() || curr != null) {
+                while (curr != null) { // Note that this should be curr != null or curr.left != null
+                    stack.push(curr);
+                    curr = curr.left;
+                }
+                curr = stack.pop();
+                output.add(curr.val);
+                curr = curr.right;
+            }
+            return output;
+        }
+    }
 
     /**
      * 20211107 10min
      */
-    class SolutionDivideAndConquer {
+    class Nov2021SolutionDivideAndConquer {
         public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> result = new ArrayList<>();
             helper(root, result);
@@ -50,7 +94,7 @@ public class Tree94BinaryTreeInorderTraversal {
     /**
      * Created by Administrator on 2017/6/29.
      */
-    public class Tree67BinaryTreeInorderTraversal {
+    public class LintTree67BinaryTreeInorderTraversal {
         /**
          * 主要分清, 不是postOrder 就不能向results里面放, 要先放stack里面, 所以需要一个指针tn来遍历
          */
