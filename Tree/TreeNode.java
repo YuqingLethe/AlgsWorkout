@@ -1,5 +1,6 @@
 package Tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -8,10 +9,10 @@ import java.util.Stack;
  * Created by XiaoMi on 2016/9/5.
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode (int x) { val = x;}
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode (int x) { val = x;}
 
     public static TreeNode buildTreeBy7Numbers(int[] treeArray) {
         TreeNode[] tnArray = new TreeNode[treeArray.length];
@@ -69,6 +70,28 @@ public class TreeNode {
             sb.append(curr.val + " ");
         }
         System.out.println(sb.toString());
+    }
+
+    public static void printTreeByPreorderTraversal(TreeNode root) {
+        ArrayList<Integer> list = preorderTraversal(root);
+        System.out.println(list.toString());
+    }
+
+    private static ArrayList<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> results = new ArrayList<>();
+        if (root == null) {
+            return results;
+        }
+        traverse(root, results);
+        return results;
+    }
+    private static void traverse(TreeNode head, ArrayList<Integer> results) {
+        if (head == null) {
+            return;
+        }
+        results.add(head.val);
+        traverse(head.left, results);
+        traverse(head.right, results);
     }
 }
 

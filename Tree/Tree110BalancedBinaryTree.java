@@ -5,8 +5,10 @@ import java.util.LinkedList;
 /**
  * 三种方法:
  * 一是两个recursion
- * 二是一个recursion只, 返回值如果是正数就是height如果 -1说明不balance
+ * 二是一个recursion, 返回值如果是正数就是height如果 -1说明不balance
  * 三是用resultType来记录isBalanced和Depth
+ *
+ * 直接運算height/depth的是top-down recurion, 而先看balanced是bottom up, 只要不balance其他就都不用看了.
  */
 public class Tree110BalancedBinaryTree {
     //之前的错误思路: http://blog.csdn.net/eatbanli/article/details/52658847
