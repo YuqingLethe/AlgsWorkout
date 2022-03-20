@@ -163,7 +163,7 @@ public class Tree236LowestCommonAncestorOfABinaryTree {
     /**
      * Created on 2017/6/17. 用特殊的Class來幫忙, 與IterativeByDFSWhileTrackingStatus異曲同工
      */
-    public class RecursiveUsingNewDataType {
+    public class RecursiveUsingNewDataType_LInt578 {
         class ResultTypeLCA {
             boolean findA;
             boolean findB;
