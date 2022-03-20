@@ -7,8 +7,8 @@ https://blog.csdn.net/eatbanli?t=1
 | Topic | LeetCode | LintCode| Note |
 |------|--------|----------|-------------|
 | String | 8 | 241 | |
-| String | 344 | 1283 |  |
 | String | 125 | 415 |  |
+| String | 344 | 1283 |  |
 | BinaryTree | 236 | 578 |  |
 
 
