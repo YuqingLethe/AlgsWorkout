@@ -32,7 +32,7 @@ public class Dai2022TraverseDirectedGraph {
             while (!deque.isEmpty()) {
                 DirectedGraphNode curr = BFS ? deque.pollFirst() : deque.pollLast();
                 result.add(curr.val);
-
+//                System.out.println("curr=" + curr.val + " neighbors=" + curr.neighbors.toString());
                 if (!curr.neighbors.isEmpty()) {
                     for (DirectedGraphNode neighbor : curr.neighbors) {
                         if (!set.contains(neighbor)) {
