@@ -91,7 +91,7 @@ public class Dai2022TraverseDirectedGraph {
 
         // Use Iterative
 //        ArrayList<Integer> iterativeResult = IterativeSolution.traverseDirectedGraph(node2, false);
-        ArrayList<Integer> recursiveResultiterativeResult = IterativeSolution.traverseDirectedGraph(node3, false);
+        ArrayList<Integer> iterativeResult = IterativeSolution.traverseDirectedGraph(node3, false);
 
         // Use Recursive (DFS)
         RecursiveSolution rs = new RecursiveSolution();
