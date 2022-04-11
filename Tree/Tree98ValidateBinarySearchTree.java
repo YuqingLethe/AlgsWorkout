@@ -77,6 +77,27 @@ public class Tree98ValidateBinarySearchTree {
             // System.out.println("Update: val=" + root.val + " high=" + (high == null? " " : high) + " low=" + (low == null? " " : low));
         }
     }
+    class DevideConquer2017WithMaxMin {
+        /**
+         * Divide & Conquer 九章答案, 自己想到了min和max的用法, 也算不错了....
+         */
+        public boolean isValidBST(LintCode.Binary.Tree.TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            return helper(root, Long.MAX_VALUE, Long.MIN_VALUE);
+        }
+        private boolean helper(LintCode.Binary.Tree.TreeNode root, long max, long min) {
+            if (root == null) {
+                return true;
+            }
+            if (root.val >= max || root.val <= min) {
+                return false;
+            }
+            return helper(root.left, Math.min(root.val, max), min)
+                    && helper(root.right, max, Math.max(root.val, min));
+        }
+    }
 
     /**
      * March 2022 完全看答案, 下面和標準答案一模一樣.
