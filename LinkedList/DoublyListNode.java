@@ -1,4 +1,4 @@
-package LintCode.Binary.Tree;
+package LinkedList;
 
 /**
  * Created by Administrator on 2017/6/23.
