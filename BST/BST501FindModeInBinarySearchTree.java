@@ -4,7 +4,6 @@ import Tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Given the root of a binary search tree (BST) with duplicates,
