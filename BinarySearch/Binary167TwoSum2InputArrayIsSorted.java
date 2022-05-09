@@ -5,7 +5,8 @@ import java.util.Arrays;
 /**
  * Created by Administrator on 2016/11/20.
  */
-public class Binary167TwoSum2InputArrayIsSorted {
+public class
+Binary167TwoSum2InputArrayIsSorted {
     /**
      * Runtime: 1ms  Use: 17min  11/20/2016
      * purely two pointers

@@ -83,4 +83,42 @@ public class Binary33SearchInRotatedSortedArray {
 
     }
 
+    class Solution {
+        public int search(int[] nums, int target) {
+            int N = nums.length - 1;
+            int left = nums[0];
+            int right = nums[N];
+
+            int start = 0, end = N;
+            if (target <= nums[end]) {
+                while (start <= end) {
+                    int mid = start + (end - start) / 2;
+                    if (nums[mid] == target) {
+                        return mid;
+                    }
+                    if (nums[mid] > nums[N] || nums[mid] < target) {
+                        start = mid + 1;
+                    } else {
+                        end = mid - 1;
+                    }
+                }
+
+            } else {
+                while (start <= end) {
+                    int mid = start + (end - start) / 2;
+                    if (nums[mid] == target) {
+                        return mid;
+                    }
+                    if (nums[mid] < nums[start] || nums[mid] > target) {
+                        end = mid - 1;
+                    } else {
+                        start = mid + 1;
+                    }
+                }
+            }
+            return -1;
+        }
+
+
+    }
 }

@@ -79,41 +79,75 @@ public class Tree257BinaryTreePaths {
         return result;
     }
 
-    /**
-     * Runtime:  11/4/2016
-     * Use recursive, and optimized String building way
-     * https://discuss.leetcode.com/topic/21474/accepted-java-simple-solution-in-8-lines
-     */
-    public static List<String> binaryTreePathsByRecursive(TreeNode root) {
-        List<String> answer = new ArrayList<>();
-        if (root != null) searchBT(root, "", answer);
-        return answer;
-    }
-    private static void searchBT(TreeNode root, String path, List<String> answer) {
-        if (root.left == null && root.right == null) answer.add(path + root.val);
-        if (root.left != null) searchBT(root.left, path + root.val + "->", answer);
-        if (root.right != null) searchBT(root.right, path + root.val + "->", answer);
-    }
 
-    /**
-     * Runtime:
-     * Optimize recursive version by using only itself
-     * https://discuss.leetcode.com/topic/23047/clean-java-solution-accepted-without-any-helper-recursive-function/2
-     */
-    public List<String> binaryTreePathsByRecursive2(TreeNode root) {
-        List<String> answer = new LinkedList<>();
-        if (root == null) return answer;
-        if (root.left == null && root.right == null) {
-            answer.add(root.val + "");
+
+
+    static class Recursive {
+        /**
+         * stringBuildingWay1 Feb 2022
+         */
+        final List<String> result = new ArrayList<>();
+        public List<String> stringBuildingWay1(TreeNode root) {
+            if (root == null) {
+                return result;
+            }
+            String path = "";
+            getPath(root, path);
+            return result;
+        }
+
+        private void getPath(TreeNode root, String path) {
+            if (root != null) {
+                path += root.val + "";
+            } else {
+                return;
+            }
+
+            if (root.left == null && root.right == null) {
+                result.add(path);
+            } else {
+                path += "->";
+                getPath(root.left, path);
+                getPath(root.right, path);
+            }
+        }
+
+        /**
+         * StringBuilderWay2:  11/4/2016
+         * Use recursive, and optimized String building way
+         * https://discuss.leetcode.com/topic/21474/accepted-java-simple-solution-in-8-lines
+         */
+        public static List<String> stringBuildingWay2(TreeNode root) {
+            List<String> answer = new ArrayList<>();
+            if (root != null) searchBT(root, "", answer);
             return answer;
         }
-        for (String path : binaryTreePathsByRecursive2(root.left)) {
-            answer.add(root.val + "->" + path);
+        private static void searchBT(TreeNode root, String path, List<String> answer) {
+            if (root.left == null && root.right == null) answer.add(path + root.val);
+            if (root.left != null) searchBT(root.left, path + root.val + "->", answer);
+            if (root.right != null) searchBT(root.right, path + root.val + "->", answer);
         }
-        for (String path : binaryTreePathsByRecursive2(root.right)) {
-            answer.add(root.val + "->" + path);
+
+        /**
+         * Runtime: 2017
+         * Optimize recursive version by using only itself
+         * https://discuss.leetcode.com/topic/23047/clean-java-solution-accepted-without-any-helper-recursive-function/2
+         */
+        public List<String> oneFunctionOnly(TreeNode root) {
+            List<String> answer = new LinkedList<>();
+            if (root == null) return answer;
+            if (root.left == null && root.right == null) {
+                answer.add(root.val + "");
+                return answer;
+            }
+            for (String path : oneFunctionOnly(root.left)) {
+                answer.add(root.val + "->" + path);
+            }
+            for (String path : oneFunctionOnly(root.right)) {
+                answer.add(root.val + "->" + path);
+            }
+            return answer;
         }
-        return answer;
     }
 
 

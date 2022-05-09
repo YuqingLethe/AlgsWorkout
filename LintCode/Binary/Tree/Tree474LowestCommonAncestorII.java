@@ -6,10 +6,8 @@ public class Tree474LowestCommonAncestorII {
     /**
      * 不要忘了A,B已经给了, 不要再找了. 2017/6/18.
      * http://www.jiuzhang.com/solution/lowest-common-ancestor-ii/
-     * @param root: The root of the tree
-     * @param A, B: Two node in the tree
-     * @return: The lowest common ancestor of A and B
-     */  
+     * 1. A B各自build他們的parents
+     */
     public ParentTreeNode lowestCommonAncestorII(ParentTreeNode root,
                                                  ParentTreeNode A,
                                                  ParentTreeNode B) {
@@ -34,9 +32,10 @@ public class Tree474LowestCommonAncestorII {
         }
         return lca;
     }
+
     private ArrayList<ParentTreeNode> buildPath(ParentTreeNode X) {
         ArrayList<ParentTreeNode> al = new ArrayList<>();
-        while(X.parent != null) {
+        while (X.parent != null) {
             al.add(X);
             X = X.parent; //遍历的时候别忘了移动指针.....
         }

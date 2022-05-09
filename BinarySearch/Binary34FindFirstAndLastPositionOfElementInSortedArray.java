@@ -1,97 +1,56 @@
 package BinarySearch;
 
-/**
- * Created by yuqing on 9/18/21.
- */
 public class Binary34FindFirstAndLastPositionOfElementInSortedArray {
-    
-    /**
-     * Created by Administrator on 2017/5/31.
-     */
-    public static class LintBinary61SearchForRange {
-        /**
-         *@param A : an integer sorted array
-         *@param target :  an integer to be inserted
-         *return : a list of length 2, [index1, index2]
-         */
-        public int[] searchRange(int[] A, int target) {
-            int[] ans = new int[2];
-            ans[0] = -1; //还可以这么赋值: bound[0] = bound[1] = -1;
-            ans[1] = -1;
-            if (A.length == 0) {
-                return ans;
+    class Solution {
+        public int[] searchRange(int[] nums, int target) {
+            int firstOccurrence = this.findBound(nums, target, true);
+            if (firstOccurrence == -1) {
+                return new int[]{-1, -1};
             }
-            if (A[A.length - 1] < target || A[0] > target) {
-                return ans;
-            }
-
-            //Find the left boundry
-            int lo = 0;
-            int hi = A.length - 1;
-            while (lo + 1 < hi) { //这个发生的条件是, lo范围是0到N-2, hi的范围是1到N-1
-                int mid = lo + (hi - lo) / 2;
-                if (A[mid] >= target) {
-                    hi = mid;
-                } else {
-                    lo = mid;
-                }
-            }
-            //以下这一块其实还能更明确, 分别比较A[lo] 和A[hi]和target大小, 相当就赋值, 都不相等就return -1-1
-            /*
-            if (A[hi] == target) {
-                ans[0] = hi;
-            } else if (A[lo] == target) {
-                ans[0] = lo;
-            } else {
-                return ans;
-            }
-             */
-            if (A[hi] != target) {//而不仅仅是A[hi] > target而已. hi应该定位到相等, 如果没有相等则不存在
-                return ans;
-            } else if (A[lo] == target) { //忘记了{5,5,5} target = 5的情况
-                ans[0] =  lo;
-            } else {
-                ans[0] = hi;
-            }
-            //Find the right boundry
-            lo = hi;
-            hi = A.length - 1;
-            while (lo + 1 < hi) {
-                int mid = lo + (hi - lo) / 2;
-                if (A[mid] > target) {
-                    hi = mid;
-                } else {
-                    lo = mid;
-                }
-            }
-            //这一块其实还能更明确, 分别比较A[lo] 和A[hi]和target大小, 相当就赋值, 都不相等就return -1-1
-            if (A[hi] == target) {
-                ans[1] = hi;
-            } else {
-                ans[1] = lo;
-            }
-            return ans;
+            int lastOccurrence = this.findBound(nums, target, false);
+            return new int[]{firstOccurrence, lastOccurrence};
         }
 
-        /**
-         * 7/26/2017
-         * 1. 对模板的理解加深了, while循环后的比较很自如
-         * 2. 一旦if里面有了return 就不用else了, 逻辑更清晰
-         * 3. 把boundary直接让hi或者lo扛, 比如left boundary的时候直接hi == lo
-         *  这样定义更清晰, 代码也简洁
-         */
-        public int[] searchRange2(int[] A, int target) {
-            int[] ans = new int[2];
-            ans[0] = -1;
-            ans[1] = -1;
-
-            if (A == null || A.length == 0) {
-                return ans;
+        private int findBound(int[] nums, int target, boolean isFirst) {
+            int begin = 0, end = nums.length - 1;
+            while (begin <= end) {
+                int mid = begin + (end - begin) / 2;
+                if (nums[mid] == target) {
+                    if (isFirst) {
+                        if ( mid == 0 || nums[mid - 1] != target) {
+                            return mid;
+                        }
+                        end = mid - 1;
+                    } else {
+                        if (mid == nums.length - 1 || nums[mid + 1] != target) {
+                            return mid;
+                        }
+                        begin = mid + 1;
+                    }
+                } else if (nums[mid] > target){
+                    end = mid - 1;
+                } else {
+                    begin = mid + 1;
+                }
             }
+            return -1;
+        }
+    }
 
-            //Find the left boundary, make hi equals its index
+    /**
+     * Created by Administrator on 2017/7/25.
+     */
+    public static class LintBinary462TotalOccurrenceOfTarget {
+        /**
+         * 2017/7/25
+         */
+        public int totalOccurrence(int[] A, int target) {
+            if (A == null || A.length == 0) {
+                return 0;
+            }
             int lo = 0;
             int hi = A.length - 1;
+            int firstIdx = 0;
             while(lo + 1 < hi) {
                 int mid = lo + (hi - lo) / 2;
                 if (A[mid] < target) {
@@ -100,37 +59,30 @@ public class Binary34FindFirstAndLastPositionOfElementInSortedArray {
                     hi = mid;
                 }
             }
-            if (A[hi] != target && A[lo] != target) {
-                return ans;
+            if (A[lo] == target)  {
+                firstIdx = lo;
+            } else {
+                firstIdx = hi;
             }
-            if (A[lo] == target) {
-                hi = lo;
-            }
-            ans[0] = hi;
 
-            //Find the right boundary, make lo equals its index
-            lo = ans[0];
+            if (A[firstIdx] != target) {
+                return 0;
+            }
+
+            lo = firstIdx;
             hi = A.length - 1;
             while(lo + 1 < hi) {
                 int mid = lo + (hi - lo) / 2;
-                if (A[mid] > target) {
-                    hi = mid;
-                } else {
+                if (A[mid] == target) {
                     lo = mid;
+                } else {
+                    hi = mid;
                 }
             }
             if (A[hi] == target) {
-                lo = hi;
+                return hi - firstIdx + 1;
             }
-            ans[1] = lo;
-            return ans;
-        }
-        //Some great test cases:
-        public static void main(String[] args) {
-            int[] test1 = {5,5,5,5};
-            int target1 = 5;
-            int[] test2 = {1,3,4,5};
-            int target2= 8;
+            return lo - firstIdx + 1;
         }
     }
 }

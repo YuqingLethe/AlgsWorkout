@@ -6,7 +6,7 @@ package BinarySearch;
 public class Binary81SearchInRotatedSortedArrayII {
     /**
      * 不会做! 6/5/2017
-     * https://discuss.leetcode.com/topic/25487/neat-java-solution-using-binary-search
+     * https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/28202/Neat-JAVA-solution-using-binary-search
      * 主要是根据lo mid hi的关系, 找到万全的条件来移动lo和hi
      * 1. 先想好以mid分界, 哪边一定是sorted array,
      * 2. 再根据target与sorted array的关系, 找lo hi移动的条件
@@ -87,5 +87,37 @@ public class Binary81SearchInRotatedSortedArrayII {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 比較好想的解法
+     */
+    class Solution {
+        public boolean search(int[] nums, int target) {
+            int N = nums.length - 1;
+            int start = 0;
+            int end = N;
+            while (start <= end) {
+                int mid = start + (end - start) / 2;
+                if (nums[mid] == target) {
+                    return true;
+                } else if (nums[mid] < nums[end] || nums[start] > nums[mid]) {
+                    if (target > nums[mid] && target <= nums[end]) {
+                        start = mid + 1;
+                    } else {
+                        end = mid - 1;
+                    }
+                } else if (nums[mid] > nums[end] || nums[start] < nums[mid]) {
+                    if (target < nums[mid] && target >= nums[start]) {
+                        end = mid - 1;
+                    } else {
+                        start = mid + 1;
+                    }
+                } else {
+                    end --;
+                }
+            }
+            return false;
+        }
     }
 }
