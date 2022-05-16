@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 2016/11/12.
  */
@@ -20,4 +22,22 @@ public class ListNode {
         }
         return head;
     }
+
+    public static void printLinkedList(ListNode head) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        while (head != null) {
+            arr.add(head.val);
+            head = head.next;
+        }
+        System.out.println(arr.toString());
+    }
+
+    public static void printListNode(ListNode head) {
+        if (head == null) {
+            System.out.println("null");
+            return;
+        }
+        System.out.println(head.val);
+    }
+
 }

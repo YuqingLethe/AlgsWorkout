@@ -40,6 +40,12 @@ import java.util.Iterator;
  *
  * Follow up:
  * How would you extend your design to be generic and work with all types, not just integer?
+ *
+ * Hints:
+ * 1. Think of "looking ahead". You want to cache the next element.
+ * 2. Is one variable sufficient? Why or why not?
+ * 3. Test your design with call order of peek() before next() vs next() before peek().
+ * 4. For a clean implementation, check out Google's guava library source code.
  */
 public class Design284PeekingIterator {
     /**
