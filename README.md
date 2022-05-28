@@ -10,5 +10,6 @@ https://blog.csdn.net/eatbanli?t=1
 | String | 125 | 415 |  |
 | String | 344 | 1283 |  |
 | BinaryTree | 236 | 578 |  |
+| Math | 31 | 52 | |
 
 

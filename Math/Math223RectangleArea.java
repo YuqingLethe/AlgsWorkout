@@ -3,7 +3,7 @@ package Math;
 /**
  * Created by Administrator on 2016/11/7.
  */
-public class Math223RectangleArea {
+public class dMath223RectangleArea {
     /**
      * Runtime: 4ms 11/7/2016
      * Rectangle 1 + Rectangle 2 - overlapping area
