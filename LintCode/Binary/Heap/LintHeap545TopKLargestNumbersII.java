@@ -88,13 +88,13 @@ public class LintHeap545TopKLargestNumbersII {
     }
 
     /**
-     * Anonymous Comparator class + minHeap
+     * Anonymous NewDataStructure class + minHeap
      */
     public class Solution3 {
         PriorityQueue<Integer> pq;
         int k;
         public Solution3(int k) {
-            // anonymous Comparator class
+            // anonymous NewDataStructure class
             this.k = k;
             pq = new PriorityQueue<Integer> (k, new Comparator<Integer>() {
                 public int compare(Integer a, Integer b) {

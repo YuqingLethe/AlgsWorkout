@@ -6,7 +6,7 @@ public class LL148SortList {
      */
     public static class LintLL98SortList {
         /**
-         * Merge Sort
+         * Merge Sort 2017
          */
         public class SolutionMergeSort {
             public ListNode sortList(ListNode head) {
