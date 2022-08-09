@@ -1,5 +1,6 @@
 package Tree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Tree100BinaryTreeRightSideView {
     class Solution {
         public List<Integer> rightSideView(TreeNode root) {
             // 3：25
-  
+            return new ArrayList<>();
         }
     }
 }
