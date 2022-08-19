@@ -60,6 +60,7 @@ public class BST99RecoverBinarySearchTree {
      * April 2022 Crib the answer
      * 不能用validation rule因为这个BST不完善 衰. 只能形成个inorder array
      * 这个算法的找两个abnormal的思路是一样的
+     * Aug 2022再看这道题还想用validation rule, 呵呵......
      */
     class Iterative_Inorder_Traversal_April2022 {
         public void recoverTree(TreeNode root) {
@@ -67,9 +68,9 @@ public class BST99RecoverBinarySearchTree {
             TreeNode a = null, b = null, prev = null;
             TreeNode curr = root; //也可以全程直接用Root
             while (!stack.isEmpty() || curr != null) {
-                while (root != null) {
-                    stack.addLast(root);
-                    root = root.left;
+                while (curr != null) {
+                    stack.addLast(curr);
+                    curr = curr.left;
                 }
                 curr = stack.removeLast();
                 if (prev != null && prev.val > curr.val) {

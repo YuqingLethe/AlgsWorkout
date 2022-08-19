@@ -10,7 +10,7 @@ public class Tree145BinaryTreePostorderTraversal {
         /**
          * Divide and conquer真的太好用了
          */
-        public ArrayList<Integer> postorderTraversal(LintCode.Binary.Tree.TreeNode root) {
+        public ArrayList<Integer> postorderTraversal(TreeNode root) {
             ArrayList<Integer> results = new ArrayList<>();
             if (root == null) {
                 return results;
@@ -26,11 +26,11 @@ public class Tree145BinaryTreePostorderTraversal {
          * @param root: The root of binary tree.
          * @return: Postorder in ArrayList which contains node values.
          */
-        public ArrayList<Integer> postorderTraversa2(LintCode.Binary.Tree.TreeNode root) {
+        public ArrayList<Integer> postorderTraversa_iterative(TreeNode root) {
             ArrayList<Integer> result = new ArrayList<>();
             Stack<LintCode.Binary.Tree.TreeNode> stack = new Stack<>();
-            LintCode.Binary.Tree.TreeNode curr = root;
-            LintCode.Binary.Tree.TreeNode prev = null;
+            TreeNode curr = root;
+            TreeNode prev = null;
             //如果在while之前push root, 则需要提前判断root为null的情况
             if (root == null) {
                 return result;
@@ -84,6 +84,7 @@ public class Tree145BinaryTreePostorderTraversal {
         }
     }
     /**
+     * Feb 22
      * 二叉树的后序遍历 题解： 使用栈进行二叉树后序遍历，首先对左子树进行遍历压入栈中，直至左子树为空，然后访问右子树。
      * 故每个节点会被访问两次，当节点被第二次访问时，该节点出栈。
      * https://www.jiuzhang.com/solution/binary-tree-postorder-traversal/

@@ -94,8 +94,8 @@ public class Tree144BinaryTreePreorderTraversal {
             return results;
         }
 
-        public class Solution {
-            public ArrayList<Integer> preorderTraversal(LintCode.Binary.Tree.TreeNode root) {
+        public class Recursive {
+            public ArrayList<Integer> preorderTraversal(TreeNode root) {
                 ArrayList<Integer> results = new ArrayList<>();
                 if (root == null) {
                     return results;
@@ -103,7 +103,7 @@ public class Tree144BinaryTreePreorderTraversal {
                 traverse(root, results);
                 return results;
             }
-            private void traverse(LintCode.Binary.Tree.TreeNode head, ArrayList<Integer> results) {
+            private void traverse(TreeNode head, ArrayList<Integer> results) {
                 if (head == null) {
                     return;
                 }

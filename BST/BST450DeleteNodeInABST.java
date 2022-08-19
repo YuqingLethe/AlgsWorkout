@@ -30,7 +30,7 @@ import Tree.TreeNode;
 public class BST450DeleteNodeInABST {
     /**
      * April_2022 傻瓜式remove 节点, 不是最优解!
-     * Self solutio 40min
+     * Self solution 40min
      */
     class Iterative_MoveNode {
         public TreeNode deleteNode(TreeNode root, int key) {
@@ -106,7 +106,7 @@ public class BST450DeleteNodeInABST {
             } else if (root.val > key) {
                 root.left = deleteNode(root.left, key);
             } else {
-                // 等写完下面的才发现, 我们就是用这个leave node来做delete的事情. 中间的只是换val, treenode节点不变!
+                // 等写完下面的才发现, 我们就是用这个leave node来做delete的事情. 中间的只是换val, treenode节点地址不变!
                 if (root.left == null && root.right == null) {
                     root = null;
                 } else if (root.right != null) { //一定要先测试right吗? 不一定, 都一样
