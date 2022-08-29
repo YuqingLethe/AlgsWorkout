@@ -1,5 +1,8 @@
 package LinkedList;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static LinkedList.ListNode.listBuilder;
 
 /**
@@ -36,39 +39,66 @@ public class LL141LinkedListCycle {
     /**
      * Runtime: 1ms Use: 23min Nov2016
      */
-    public static boolean hasCycleTwoPointers(ListNode head) {
-        if (head == null || head.next == null) return false;
-        ListNode slow = head, fast = head.next.next;
-        while(fast != null && slow != null && slow.next != null && fast.next != null && fast.next.next != null) {
-            if (fast == slow) return true;
-            fast = fast.next.next;
-            slow = slow.next;
+    static public class TwoPointers {
+        public boolean hasCycle(ListNode head) {
+            if (head == null || head.next == null) {
+                return false;
+            }
+            ListNode fast = head;
+            ListNode slow = head;
+            while (fast.next != null && fast.next.next != null && slow.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+                if (slow == fast && fast != null) {
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
+
+        public static boolean hasCycleTwoPointers_2016_1(ListNode head) {
+            if (head == null || head.next == null) return false;
+            ListNode slow = head, fast = head.next.next;
+            while(fast != null && slow != null && slow.next != null && fast.next != null && fast.next.next != null) {
+                if (fast == slow) return true;
+                fast = fast.next.next;
+                slow = slow.next;
+            }
+            return false;
+        }
+
+        public static boolean hasCycleTwoPointers_2016_2(ListNode head) {
+            ListNode slow = head, fast = head;
+            while(fast != null && fast.next != null) {
+                fast = fast.next.next;
+                if (fast == slow) return true;
+                slow = slow.next;
+            }
+            return false;
+        }
     }
 
-    public static boolean hasCycleTwoPointers2(ListNode head) {
-        ListNode slow = head, fast = head;
-        while(fast != null && fast.next != null) {
-            fast = fast.next.next;
-            if (fast == slow) return true;
-            slow = slow.next;
+    public class Iterative_Set {
+        /**
+         * Aug 2022
+         */
+        public boolean hasCycle(ListNode head) {
+            if (head == null) { //可以加个head.next == null
+                return false;
+            }
+            ListNode curr = head;
+            Set<ListNode> set = new HashSet<>();
+            set.add(curr);
+            while (curr.next != null) {
+                curr = curr.next;
+                if (!set.contains(curr)) {
+                    set.add(curr);
+                } else {
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
-    }
-
-    public static void main(String[] args) {
-        ListNode ln1 = new ListNode(4);
-        ListNode ln2 = new ListNode(2);
-        ListNode ln3 = new ListNode(3);
-        ln1.next = ln2;
-        ln2.next = ln3;
-//        ln3.next = ln1;
-
-        int[] nums = {7032,1};
-        ListNode head = listBuilder(nums);
-        System.out.println(ln3.next);
-        System.out.println(hasCycleTwoPointers2(ln2));
     }
 
     /**
@@ -91,4 +121,19 @@ public class LL141LinkedListCycle {
             return false;
         }
     }
+
+    public static void main(String[] args) {
+        ListNode ln1 = new ListNode(4);
+        ListNode ln2 = new ListNode(2);
+        ListNode ln3 = new ListNode(3);
+        ln1.next = ln2;
+        ln2.next = ln3;
+//        ln3.next = ln1;
+
+        int[] nums = {7032,1};
+        ListNode head = listBuilder(nums);
+        System.out.println(ln3.next);
+    }
+
+
 }

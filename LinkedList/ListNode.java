@@ -13,6 +13,9 @@ public class ListNode {
         next = null;
     }
     public static ListNode listBuilder(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
         ListNode head = new ListNode(arr[0]);
         ListNode pointer = head;
         for (int i = 1; i < arr.length; i++) {
