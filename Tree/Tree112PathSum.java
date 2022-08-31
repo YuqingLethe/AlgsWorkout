@@ -1,5 +1,7 @@
 package Tree;
 
+import Utility.PrintDataStructure;
+
 import java.util.*;
 
 public class Tree112PathSum {
@@ -222,7 +224,7 @@ public class Tree112PathSum {
 
         private static void print(Stack<TreeNode> treeStack, Stack<Integer> integerStack) {
             TreeNode.printTreeNodeStack(treeStack);
-            Helper.PrintDataStructure.printIntegerStack(integerStack);
+            PrintDataStructure.printIntegerStack(integerStack);
         }
     }
 
