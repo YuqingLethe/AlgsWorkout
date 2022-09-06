@@ -28,7 +28,7 @@ public class GetMinimumRanges {
 
     // 11;25 - 12:11 -> 50min..... not all test pass....
     static class SortByLowerBoundAndRange_DoubleTraversal {
-        // TODO: Yoki问 Yoki 倒序再来那么一遍就能过test case 3 6 7么
+        // TODO: 倒序再来那么一遍就能过test case 3 6 7么
         public int mergeIntervals(int[][] arr) {
             if (arr == null || arr.length <= 1) {
                 return 0;
