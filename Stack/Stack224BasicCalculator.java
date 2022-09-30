@@ -3,7 +3,7 @@ package Stack;
 import java.util.Stack;
 
 /**
- * Created by yuqing on 7/17/22.
+ * on 7/17/22.
  */
 public class Stack224BasicCalculator {
     class StackNoReversal {
