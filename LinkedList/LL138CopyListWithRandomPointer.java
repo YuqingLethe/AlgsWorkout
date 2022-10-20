@@ -3,6 +3,17 @@ package LinkedList;
 import java.util.HashMap;
 
 public class LL138CopyListWithRandomPointer {
+    class Node {
+        int val;
+        Node next;
+        Node random;
+
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
+    }
     /**
      * Created by Administrator on 2017/7/7.
      */
@@ -13,7 +24,7 @@ public class LL138CopyListWithRandomPointer {
             RandomListNode(int x) { this.label = x; }
         }
 
-        public class Solution {
+        public class SetNextFirstLoop_RandomSecond {
             /**
              * @param head: The head of linked list with a random pointer.
              * @return: A new head of a deep copy of the list.
@@ -46,6 +57,42 @@ public class LL138CopyListWithRandomPointer {
 
                 return hashmap.get(head);
             }
+        }
+    }
+
+    /**
+     * Oct 2022 20min
+     */
+    class CreateNodeFirstLoop_SetNextRandomSecond {
+        public Node copyRandomList(Node head) {
+            HashMap<Node, Node> hm = new HashMap<>();
+
+            // Deep copy all nodes and save to hashmap
+            Node oldIdx = head;
+            while (oldIdx != null) {
+                Node curr = new Node(oldIdx.val);
+                hm.put(oldIdx, curr);
+                oldIdx = oldIdx.next;
+            }
+
+            // Link new node
+            Node dummyHead = new Node(0);
+            Node prev = dummyHead;
+            oldIdx = head;
+            while (oldIdx != null) {
+                Node curr = hm.get(oldIdx);
+                if (oldIdx.random == null) {
+                    curr.random = null;
+                } else {
+                    curr.random = hm.get(oldIdx.random);
+                }
+
+                prev.next = curr;
+                prev = curr;
+                oldIdx = oldIdx.next;
+            }
+            prev.next = null;
+            return dummyHead.next;
         }
     }
 }

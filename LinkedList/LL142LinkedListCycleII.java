@@ -34,6 +34,9 @@ public class LL142LinkedListCycleII {
 
         /**
          * 可以推导的数学公式 第一个while的条件很好, 比冗余版本相比减少了一次判断 July2017
+         *
+         * 2022 Oct依旧忘了数学公式, 不会做后半部分
+         *
          */
         public class Solution {
 

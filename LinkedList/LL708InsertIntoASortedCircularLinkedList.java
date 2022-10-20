@@ -1,6 +1,94 @@
 package LinkedList;
 
 public class LL708InsertIntoASortedCircularLinkedList {
+    class Node {
+        public int val;
+        public Node next;
+
+        public Node() {}
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, Node _next) {
+            val = _val;
+            next = _next;
+        }
+    };
+
+    /**
+     * Leetcode官方答案. 注意它insert和在环的末尾的处理
+     */
+    class LeetcodeSolution {
+        public Node insert(Node head, int insertVal) {
+            if (head == null) {
+                Node newNode = new Node(insertVal, null);
+                newNode.next = newNode;
+                return newNode;
+            }
+
+            Node prev = head;
+            Node curr = head.next;
+            boolean toInsert = false;
+
+            do {
+                if (prev.val <= insertVal && insertVal <= curr.val) {
+                    // Case 1).
+                    toInsert = true;
+                } else if (prev.val > curr.val) {
+                    // Case 2).
+                    if (insertVal >= prev.val || insertVal <= curr.val)
+                        toInsert = true;
+                }
+
+                if (toInsert) {
+                    prev.next = new Node(insertVal, curr);
+                    return head;
+                }
+
+                prev = curr;
+                curr = curr.next;
+            } while (prev != head);
+
+            // Case 3).
+            prev.next = new Node(insertVal, curr);
+            return head;
+        }
+    }
+
+    /**
+     * 30min参考了答案. 主要是3个case想清楚才行.
+     */
+    class Oct2022_ReferSolution {
+        public Node insert(Node head, int insertVal) {
+            if (head == null) {
+                Node newNode = new Node(insertVal, null);
+                newNode.next = newNode;
+                return newNode;
+            }
+            Node curr = head;
+            Node prev = head;
+            do { //curr如果从head开始, 肯定要落在head上面. 因此结束条件用prev
+                curr = curr.next;
+                if (prev.val <= curr.val && prev.val <= insertVal && insertVal <= curr.val) {
+                    break;
+                }
+                if (prev.val > curr.val && (insertVal < curr.val || insertVal > prev.val)) {
+                    break;
+                }
+                if (curr == head && prev.val == curr.val && curr.val != insertVal) {
+                    break;
+                }
+
+                prev = prev.next;
+            } while (prev != head);
+
+            // Node newNode = new Node(insertVal, curr);
+            prev.next = new Node(insertVal, curr);
+            return head;
+        }
+    }
     /**
      * Given a Circular Linked List node, which is sorted in ascending order, write a function to insert a value insertVal into the list such that it remains a sorted circular list. The given node can be a reference to any single node in the list and may not necessarily be the smallest value in the circular list.
      *
@@ -29,49 +117,22 @@ public class LL708InsertIntoASortedCircularLinkedList {
      * -106 <= Node.val, insertVal <= 106
      */
     public static class LintLL599InsertIntoACyclicSortedList {
-        /**
-         * 2017/7/21
-         * if语句写的乱并且没有条理, 受不了了 很多failed case 2->2->2, 3
-         * 看了答案发现答案逻辑清晰简单, 重新写
-         *
-         */
-        public ListNode insertWrong(ListNode node, int x) {
-            if (node == null) { //Failed: null, 4
-                ListNode tmp = new ListNode(x);
-                tmp.next = tmp;
-                return tmp;
-            }
-
-            ListNode dummy = node;
-            do {
-                if ((dummy.val <= x && dummy.next.val >= x)
-                        || (dummy.val <= x && dummy.next.val < dummy.val) //不能处理case: 0, 1 否则有重复val的节点无无法前进了
-                        || (dummy.val >= dummy.next.val && dummy.next.val > x)
-                        || (dummy.next == dummy) //Failed: 0, 1  特殊性就是
-                        ) {
-                    ListNode tmp = new ListNode(x);
-                    tmp.next = dummy.next;
-                    dummy.next = tmp;
-                    return tmp;
-                }
-                dummy = dummy.next;
-            } while (dummy != node);
-            return null;
-        }
-
+        // 两个题不同. lintcode是加在前面, leetcode是加在后面, head不变
+    }
+    class July2017_JiuzhangChangeToBeLeetcodeCompatible {
         /**
          * 2017/7/21
          * 答案做法, 先讨论原LL的两种情况, 再根据这两种情况加上x的大小比较
          */
-        public ListNode insert(ListNode node, int x) {
+        public Node insert(Node node, int x) {
             if (node == null) {
-                ListNode tmp = new ListNode(x);
+                Node tmp = new Node(x);
                 tmp.next = tmp;
                 return tmp;
             }
-            ListNode dummy = node;
+            Node dummy = node;
             do {
-                if (dummy.val <= x && x < dummy.next.val)  { //Failed: 30->50->2->2->3->5, 2 忘记了等号
+                if (dummy.val <= x && x <= dummy.next.val)  { //Failed: 30->50->2->2->3->5, 2 忘记了等号
                     break;
                 }
                 if (dummy.val > dummy.next.val && (x < dummy.next.val || x > dummy.val)) {
@@ -79,10 +140,12 @@ public class LL708InsertIntoASortedCircularLinkedList {
                 }
                 dummy = dummy.next;
             } while (dummy != node);
-            ListNode tmp = new ListNode(x);
+            Node tmp = new Node(x);
             tmp.next = dummy.next;
             dummy.next = tmp;
-            return tmp;
+            return node;
         }
     }
+
+
 }
