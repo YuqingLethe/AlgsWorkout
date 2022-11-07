@@ -1,4 +1,4 @@
-package NewDataStructure;
+package UnionFind;
 
 /**
  * 839. Similar String Groups

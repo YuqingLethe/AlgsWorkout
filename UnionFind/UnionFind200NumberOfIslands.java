@@ -1,4 +1,4 @@
-package NewDataStructure;
+package UnionFind;
 
 /**
  * Created by yuqing on 7/13/22.

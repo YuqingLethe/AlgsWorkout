@@ -1,4 +1,4 @@
-package NewDataStructure;
+package UnionFind;
 
 import java.util.ArrayList;
 import java.util.List;
