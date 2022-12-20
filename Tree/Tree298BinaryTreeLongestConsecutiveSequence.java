@@ -74,9 +74,9 @@ public class Tree298BinaryTreeLongestConsecutiveSequence {
     }
 
     /**
-     * 照抄答案, 需要重做
+     * April2022 照抄答案
      */
-    class TopBottomBFSCopy2022 {
+    class TopBottom_DFS_Copy2022 {
         public int longestConsecutive(TreeNode root) {
             return helper(root, null, 0);
         }
@@ -92,13 +92,42 @@ public class Tree298BinaryTreeLongestConsecutiveSequence {
             }
             int leftLen = helper(root.left, root, len);
             int rightLen = helper(root.right, root, len);
-            return Math.max(len, Math.max(leftLen, rightLen));
+            return Math.max(len, Math.max(leftLen, rightLen)); //这里很巧妙直接比较三个, 比一个个比方便
         }
 
+    }
+
+    /**
+     * Nov 2022 远不如答案精简
+     */
+    class TopBottom_Nov2022 {
+        public int longestConsecutive(TreeNode root) {
+            return findConsecutiveFromValue(null, root, 1);
+        }
+        private int findConsecutiveFromValue(Integer prev, TreeNode root, int length) {
+            int maxLength = length;
+            int currLength;
+            if (prev != null && root.val == prev + 1) {
+                currLength = length + 1;
+                maxLength = currLength; //注意这里别忘了, maxLength也要更新
+            } else {
+                currLength = 1;
+            }
+
+            if (root.left != null) {
+                maxLength = Math.max(maxLength,findConsecutiveFromValue(root.val, root.left, currLength));
+            }
+            if (root.right != null) {
+                maxLength = Math.max(maxLength, findConsecutiveFromValue(root.val, root.right, currLength));
+            }
+            return maxLength;
+
+        }
     }
 
     public void main(String[] args) {
         Integer[] array = {1,null,3,2,4,null,null,null,5};
         Integer[] array2 = {1,2,2,3,null,null,3,4,null,null,4};
+        Integer[] array3 = {1};
     }
 }
