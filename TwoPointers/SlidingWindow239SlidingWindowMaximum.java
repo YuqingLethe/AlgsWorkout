@@ -23,7 +23,7 @@ public class SlidingWindow239SlidingWindowMaximum {
             int max_idx = 0;
             this.nums = nums;
 
-            for (int i = 0; i < k; ++i) {
+            for (int i = 0; i < k; ++i) { //先找到前k個最大值
                 clean_deque(i, k);
                 deq.addLast(i);
                 if (nums[i] > nums[max_idx]) {
@@ -34,7 +34,7 @@ public class SlidingWindow239SlidingWindowMaximum {
             int[] output = new int[n - k + 1];
             output[0] = nums[max_idx];
 
-            for (int i = k; i < n; ++i) {
+            for (int i = k; i < n; ++i) { // 從k開始向後找當前range=k的最大值
                 clean_deque(i, k);
                 deq.addLast(i);
                 output[i - k + 1] = nums[deq.getFirst()];
@@ -52,6 +52,14 @@ public class SlidingWindow239SlidingWindowMaximum {
             }
         }
     }
+
+    /**
+     * TODO: Do this
+     * https://leetcode.com/problems/sliding-window-maximum/solutions/65881/o-n-solution-in-java-with-two-simple-pass-in-the-array/
+     *
+     */
+    class DP {}
+
 
     public static void main(String[] args) {
         int[] nums = {1, -1};
