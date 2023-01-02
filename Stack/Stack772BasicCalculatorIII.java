@@ -30,7 +30,7 @@ public class Stack772BasicCalculatorIII {
             while (!q.isEmpty()) {
                 Character c = q.poll();
                 if (Character.isDigit(c)) {
-                    num = num * 10 + c - '0';
+                    num = num * 10 + c - '0'; //注意这里不是+=, num已经算在后面了
                 } else if (c == '(') {
                     num = calResultOfSubFomula(q); //注意这里进入了小括号内的运算
                 } else if ("+-*/".indexOf(c) != -1) {
@@ -52,16 +52,15 @@ public class Stack772BasicCalculatorIII {
             switch(op) {
                 case '+':
                     stack.push(num);
-                    break;
+                    break; //注意这个break是需要的
                 case '-':
                     stack.push(-num);
                     break;
                 case '*':
-                    int prevNum = stack.pop();
-                    stack.push(prevNum*num);
+                    stack.push(stack.pop() * num);
                     break;
                 case '/':
-                    stack.push(stack.pop()/num);
+                    stack.push(stack.pop() / num);
                     break;
                 default:
                     break;

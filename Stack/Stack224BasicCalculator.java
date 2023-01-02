@@ -1,5 +1,7 @@
 package Stack;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -97,6 +99,62 @@ public class Stack224BasicCalculator {
                 stack.push(operand);
             }
             return evaluateExpr(stack);
+        }
+    }
+
+    class CalculatorMuban {
+        public int calculate(String s) {
+            if (s == null || s.length() == 0) {
+                return 0;
+            }
+            Queue<Character> q = new LinkedList<>();
+            for (int i = 0; i < s.length(); ++i) {
+                char c = s.charAt(i);
+                if (c == ' ') {
+                    continue;
+                }
+                q.add(c);
+            }
+            return calculateSubExpression(q);
+        }
+        private int calculateSubExpression(Queue<Character> q) {
+            Stack<Long> stack = new Stack<>();
+            long num = 0;
+            char preOperand = '+';
+            while (!q.isEmpty()) {
+                char ch = q.poll();
+                if (Character.isDigit(ch)) {
+                    num = num*10 + ch - '0';
+                } else if ("+-*/".indexOf(ch) != -1) {
+                    addToStack(stack, num, preOperand);
+                    preOperand = ch;
+                    num = 0;
+                } else if (ch == '(') {
+                    num = calculateSubExpression(q);
+                } else {
+                    break;
+                }
+            }
+            addToStack(stack, num, preOperand);
+            int result = 0;
+            while (!stack.isEmpty()) {
+                result += stack.pop();
+            }
+            return result;
+        }
+
+        private void addToStack(Stack<Long> stack, Long num, char preOperand) {
+            switch(preOperand) {
+                case '+':
+                    stack.push(num);
+                    break;
+                case '-':
+                    stack.push(-num);
+                    break;
+                default:
+                    break;
+
+            }
         }
     }
 
