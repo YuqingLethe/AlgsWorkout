@@ -3,13 +3,14 @@ package PriorityQueue;
 import java.util.*;
 
 /**
- * Created by yuqing on 7/17/22.
+ * Created on 7/17/22.
  */
 public class PQ1102PathWithMaximumMinimumValue {
     class BFS_BinarySearch {
         public int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         int m;
         int n;
+
         public int maximumMinimumPath(int[][] grid) {
             m = grid.length;
             n = grid[0].length;
