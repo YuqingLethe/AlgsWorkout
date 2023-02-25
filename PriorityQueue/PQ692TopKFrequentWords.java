@@ -72,7 +72,7 @@ public class PQ692TopKFrequentWords {
             }
 
             List<Word> candidates = new ArrayList<>();
-            for (var entry : cnt.entrySet()) {
+            for (Map.Entry<String, Integer> entry : cnt.entrySet()) { // 注意如果entrySet返回的是Map.Entry
                 candidates.add(new Word(entry.getKey(), entry.getValue()));
             }
 
