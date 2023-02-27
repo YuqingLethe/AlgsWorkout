@@ -94,7 +94,7 @@ public class Graph743NetworkDelayTime {
             Queue<Integer> q = new LinkedList<>();
             q.add(sourceNode);
 
-            signalReceiveAt[sourceNode] = 0;
+            signalReceiveAt[sourceNode] = 0;  //Feb2023 注意这个别忘了
             while (!q.isEmpty()) {
                 int currNode = q.remove();
                 if (!adj.containsKey(currNode)) {
@@ -103,8 +103,9 @@ public class Graph743NetworkDelayTime {
                 for (Pair<Integer, Integer> edge : adj.get(currNode)) {
                     int time = edge.getKey();
                     int neighborNode = edge.getValue();
-                    int arrivalTime = signalReceiveAt[currNode] + time;
-
+                    int arrivalTime = signalReceiveAt[currNode] + time; //Feb2023 注意这个别忘了加已经有的时间
+                    // networkAvailAt[to] = Math.min(networkAvailAt[to], reachTime); //错误写法
+                    // 这里有一个重要思想, 就是一旦现有路径比后面的小, 那么就不要再enqueue后面的路径了, 这样就避免了循环timeout!
                     if (signalReceiveAt[neighborNode] > arrivalTime) {
                         signalReceiveAt[neighborNode] = arrivalTime;
                         q.add(neighborNode);
@@ -169,5 +170,12 @@ public class Graph743NetworkDelayTime {
 
             }
         }
+    }
+
+    public static void main(String[] args) {
+        int[][] times = [[4,2,76],[1,3,79],[3,1,81],[4,3,30],[2,1,47],
+        [1,5,61],[1,4,99],[3,4,68],[3,5,46],[4,1,6],[5,4,7],[5,3,44],
+        [4,5,19],[2,3,13],[3,2,18],[1,2,0],[5,1,25],[2,5,58],[2,4,77],[5,2,74]];
+
     }
 }
