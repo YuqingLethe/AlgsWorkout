@@ -73,4 +73,5 @@ public class Stack1673FindTheMostCompetitiveSubsequence {
         Stack1673FindTheMostCompetitiveSubsequence myClass = new Stack1673FindTheMostCompetitiveSubsequence();
         myClass.mostCompetitiveTimeout(nums1, 1);
     }
+
 }
