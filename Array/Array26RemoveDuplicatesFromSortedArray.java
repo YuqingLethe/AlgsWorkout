@@ -93,7 +93,38 @@ public class Array26RemoveDuplicatesFromSortedArray {
 		}
 		return r + 1;
 	}
+		
 
+	/**
+	* 202609 in-place替换，从左到右。
+	* 每次必然移动j寻找下一个non-val；选择性移动i一直到val element。
+	* 每次swap以后必然要移动i，如果nums[i] != val也要移动i；
+	* 错误点：如果nums[i] != val移动i的时候必然不会进行替换，因此这两个移动i的步骤互斥，应该有else if。否则两个if的话i有可能单词循环被移动两个格，然而j只动了一个，产生错误。
+	*/
+	public int removeElement(int[] nums, int val) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int i = 0; // index of to-be-replaced element
+        int j = 0; // index of next val-value element
+
+        while (j < nums.length) {
+            // main process [2 2 i3 3]j
+            // S1: replace in-place element val -> -1; then move forward of non-val values
+            // S2: find and move forward at the same time
+            if (nums[i] != val) {
+                i ++;
+            } else if (nums[j] != val && nums[i] == val && i != j) {
+                 // swap
+                 nums[i] = nums[j];
+                 nums[j] = val; 
+                 i ++;
+            }
+            j ++;
+        }
+        return i;
+    }
 
 	public static void main( String[] args) {
 		int[] nums = new int[]{1,1,2,3};
