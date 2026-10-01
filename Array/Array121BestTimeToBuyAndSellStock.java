@@ -41,6 +41,22 @@ public class Array121BestTimeToBuyAndSellStock {
 		}
 	}
 
+	// 2026 用Brute Force都减错了，应该是prices[j] - prices[i], 我写反了。。。
+	public int maxProfit2026(int[] prices) {
+		int valleyMin = Integer.MAX_VALUE;
+		int peakMax = 0;
+		int best = 0;
+
+		for (int i = 0; i < prices.length; i ++) {
+			if (prices[i] < valleyMin) {
+				valleyMin = prices[i];
+			} else if (prices[i] > valleyMin) {
+				peakMax = prices[i];
+				best = peakMax - valleyMin > best ? peakMax - valleyMin : best;
+			}
+		}
+		return best;
+	}
 
 	public static void main(String[] args) {
 		LinearSolution solution = new LinearSolution();

@@ -1,6 +1,7 @@
 package Tree;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Tree226InvertBinaryTree {
     //Runtime: 1ms Same w/ Tree101MirrorTree()
@@ -21,6 +22,27 @@ public class Tree226InvertBinaryTree {
             lltree.add(lltree.peek().left);
             lltree.add(lltree.peek().right);
             lltree.remove();
+        }
+        return root;
+    }
+
+    public TreeNode invertTreeByIterative2026(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode curr = q.poll();
+            if (curr.left != null) {
+                q.add(curr.left);
+            }
+            if (curr.right != null) {
+                q.add(curr.right);
+            }
+            TreeNode tmp = curr.left;
+            curr.left = curr.right;
+            curr.right = tmp;
         }
         return root;
     }
