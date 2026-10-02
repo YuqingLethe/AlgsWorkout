@@ -46,6 +46,44 @@ public class BC322CoinChange {
             return minCoins;
         }
     }
+
+    /**
+     * 2026 Topdown DP 每次都可以运用所有的coin，并不是subtract问题，没必要传入n或者n-1.
+     * 但是我们每次都需要遍历amount - coins[i],从而选择subset。
+     * 基本抄的答案
+     */
+    class TopDown_dp_2026 {
+        public int coinChange(int[] coins, int amount) {
+            if (amount == 0 || coins.length == 0) {
+                return 0;
+            }
+            int[] memo = new int[amount];
+            return findChange(coins, amount, memo);
+        }
+
+        private int findChange(int[] coins, int amount, int[] memo) {
+            System.out.println("amount=" + amount);
+            if (amount < 0) {
+                return -1;
+            }
+            if (amount == 0) {
+                return 0;
+            }
+            if (memo[amount - 1] != 0) {
+                return memo[amount - 1];
+            }
+            Integer min = Integer.MAX_VALUE;
+            for (int i = 0; i < coins.length; i ++) {
+                int nextMin = findChange(coins, amount - coins[i], memo);
+                if (nextMin >= 0) { // 这里增加&& res < min可以减少条件
+                    min = Math.min(min, nextMin) + 1;
+                }
+
+            }
+            memo[amount - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+            return memo[amount - 1];
+        }
+    }
     public static void main(String[] args) {
         int[] coins = {186,419,83,408};
 
