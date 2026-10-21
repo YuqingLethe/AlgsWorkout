@@ -1,6 +1,6 @@
 package Graph;
 
-import javafx.util.Pair;
+import Utility.Pair;
 
 import java.util.*;
 

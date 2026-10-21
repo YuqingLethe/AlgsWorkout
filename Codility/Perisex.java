@@ -2,6 +2,8 @@ package Codility;
 
 import java.util.*;
 
+import static java.lang.String.valueOf;
+
 /**
  * Created by Administrator on 2017/5/20.
  */
@@ -75,7 +77,7 @@ public class Perisex {
         }
         //Hours
         if (g1.contains(2)) {
-            ans += g1.remove(new Integer(2));
+            ans += g1.remove(valueOf(2));
             if (g1.contains(3)) {
                 ans += g1.remove(new Integer(3));
             } else if (!g1.isEmpty()){
