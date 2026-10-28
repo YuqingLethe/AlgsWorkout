@@ -37,7 +37,7 @@ public class Array1TwoSum {
 		int j = i + 1;
 		while (i < nums.length) {
 			int complement = nums[i];
-			if (map.containsKey(complement) && map.get(complement) != i) {
+			if (map.containsKey(complement) && map.get(complement) != i) { // 没有用j的地方所以其实不需要查看！= i，因i一直增加
 				int[] result = new int[2];
 				result[0] = map.get(complement);
 				result[1] = i;
@@ -72,6 +72,23 @@ public class Array1TwoSum {
 			}
 		}
 		throw new IllegalArgumentException("No two sun found");
+	}
+
+	/**
+	 * 读题要仔细到底返回什么，练习巧妙用map
+	 * 英文Complement number
+	 * 我感觉我之前写的
+	 */
+	public int[] twoSum2026OnePass(int[] nums, int target) {
+		Map<Integer, Integer> map = new HashMap<>(); // The compensate nuumber and the index of the first number
+		for (int i = 0; i < nums.length; i ++) {
+			if (map.containsKey(nums[i])) {
+				return new int[]{ map.get(nums[i]), i};
+			} else {
+				map.put(target - nums[i], i);
+			}
+		}
+		return new int[]{-1, -1}; // 可以用空return new int[] {};
 	}
 
 	public static void main(String[] args) {
