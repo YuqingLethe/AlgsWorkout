@@ -2,6 +2,9 @@ package BST;
 
 import Tree.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /**
  * You are given the root of a binary search tree (BST) and an integer val.
  *
@@ -18,6 +21,22 @@ import Tree.TreeNode;
  */
 public class BST700SearchInABinaryTree {
     class Recursive {
+        /**
+         * 2026版本同样把null check放前面，不过又忘记search
+         */
+        public TreeNode searchBST_recursive(TreeNode root, int val) {
+            if (root == null) {
+                return null;
+            }
+            if (root.val == val) {
+                return root;
+            }
+            TreeNode leftResult = searchBST(root.left, val);
+            TreeNode rightResult = searchBST(root.right, val);
+
+            return leftResult == null ? rightResult : leftResult;
+        }
+
         public TreeNode searchBST(TreeNode root, int val) {
             if (root == null) {
                 return null;
@@ -32,7 +51,9 @@ public class BST700SearchInABinaryTree {
         }
     }
     class Iterative {
-        //April2022
+        /**
+         * April2022 不改root是个好习惯！
+         */
         public TreeNode searchBST(TreeNode root, int val) {
             TreeNode curr = root;
             while (curr != null) {
@@ -52,6 +73,27 @@ public class BST700SearchInABinaryTree {
             while (root != null && val != root.val)
                 root = val < root.val ? root.left : root.right;
             return root;
+        }
+
+        /**
+         * 2026年我竟然忘记search还用queue写了个brute force
+         */
+        public TreeNode searchBST_BruteForce(TreeNode root, int val) {
+            Queue<TreeNode> q = new ArrayDeque<>();
+            q.offer(root);
+            while (!q.isEmpty()) {
+                TreeNode curr = q.poll();
+                if (curr.val == val) {
+                    return curr;
+                }
+                if (curr.left != null) {
+                    q.offer(curr.left);
+                }
+                if (curr.right != null) {
+                    q.offer(curr.right);
+                }
+            }
+            return null;
         }
     }
 }

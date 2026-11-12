@@ -2,9 +2,7 @@ package BST;
 
 import Tree.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Implement the BSTIterator class that represents an iterator over the in-order traversal of a binary search tree (BST):
@@ -46,45 +44,46 @@ import java.util.Stack;
  */
 public class BST173BinarySearchTreeIterator {
     /**
-     * _april2022_self
-     * TODO: Using arraylist insted of queue
+     * _april2022_self 用的Queue，2026用的ArrayList
+     * TODO: Using arraylist instead of queue
      */
-    class BSTIterator_queue {
-        private Queue<TreeNode> q;
-        public BSTIterator_queue(TreeNode root) {
-            this.q = new LinkedList<>();
-            inorderTraversal(root);
+    class BSTIterator_flatten_to_list {
+
+        private List<Integer> valueList; // 可以作为final，可以取名sortedList更精确
+        private int index;
+        public BSTIterator_flatten_to_list(TreeNode root) {
+            this.valueList = new ArrayList<>();
+            buildList(root);
+            this.index = 0;
         }
-        private void inorderTraversal(TreeNode root) {
+
+        private void buildList(TreeNode root) {
             if (root == null) {
                 return;
             }
-            inorderTraversal(root.left);
-            q.add(root);
-            inorderTraversal(root.right);
+            buildList(root.left);
+            this.valueList.add(root.val);
+            buildList(root.right);
         }
 
         public int next() {
-            TreeNode curr = this.q.poll();
-            return curr.val;
+            return valueList.get(this.index ++); // 这个写法第一次尝试，通过！
         }
 
         public boolean hasNext() {
-            if (q.peek() != null) {
-                return true;
-            }
-            return false;
+            return this.index <= valueList.size() - 1;
         }
     }
 
     /**
      * April 2022 Crib the answer
+     * 2026看了答案自己写
      */
-    class BSTIterator_dynamicByStack {
-        private Stack<TreeNode> stack;
+    class BSTIterator_lazy_evaluation {
+        private final Deque<TreeNode> stack;
 
-        public BSTIterator_dynamicByStack(TreeNode root) {
-            this.stack = new Stack<>();
+        public BSTIterator_lazy_evaluation(TreeNode root) {
+            this.stack = new ArrayDeque<>();
             pushAllNodesTillFurthest(root);
         }
         private void pushAllNodesTillFurthest(TreeNode root) {
@@ -95,6 +94,9 @@ public class BST173BinarySearchTreeIterator {
         }
 
         public int next() {
+            if (stack.isEmpty()) {
+                throw new NoSuchElementException("No more element in the BSTIterator!"); // 防御型代码，虽然条件说了next肯定有值，但值得写！
+            }
             TreeNode curr = this.stack.pop();
             if (curr.right != null) {
                 pushAllNodesTillFurthest(curr.right);
@@ -104,7 +106,7 @@ public class BST173BinarySearchTreeIterator {
 
 
         public boolean hasNext() {
-            return !this.stack.empty();
+            return !this.stack.isEmpty();
         }
     }
 }
